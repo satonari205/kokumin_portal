@@ -7,4 +7,4 @@ class BbsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tweet
-        fields = ('id','user','content','reply_to','posted_at','image')
+        fields = ('id','user','content','reply_to','posted_at','image1','image2')
