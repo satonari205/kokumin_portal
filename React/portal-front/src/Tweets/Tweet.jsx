@@ -14,7 +14,7 @@ export const Tweet = ({ tweet }) => {
             />
         </span>
         <Link
-            to={`/users/${tweet.user.id}`}
+            to={`/user/${tweet.user.id}`}
             className="leading-10 pl-3 w-1/2 hover:underline"
         >
             <p>{tweet.user.username}</p>
@@ -32,7 +32,7 @@ export const Tweet = ({ tweet }) => {
             コメントする
         </Link>
         </div>
-    </div>
+      </div>
     </>
   );
 };

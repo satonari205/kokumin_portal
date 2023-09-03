@@ -22,7 +22,7 @@ export const TweetDetail = ({ tweetList }) => {
     return(
         <>
             {/* ツイート詳細表示画面 */}
-            <div className="p-3">
+            <div className="mr-auto ml-auto max-w-5xl p-3">
                 <div className="avatar flex justify-start w-1/2 m-2">
                     <span className="w-10 h-10">
                         <img className="rounded" src={tweet.user.image || "/images/default.jpg"} alt="userimg" />
@@ -51,13 +51,15 @@ export const TweetDetail = ({ tweetList }) => {
                 </div>
                 {formattedDate}
                 {/* {tweet.posted_at} */}
+                <div className="divider-y">
+                {/* 返信するためのフォーム */}
+                </div>
+                <div>
+                </div>
+                <div className="divider-y">
+                {/* 返信されたTweetの表示 */}
+                </div>
             </div>
-            <div className="divider"></div>
-            <div>
-            {/* 返信するためのフォーム */}
-            </div>
-            <div className="divider"></div>
-            {/* 返信されたTweetの表示 */}
         </>
     )
 };

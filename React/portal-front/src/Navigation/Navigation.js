@@ -12,17 +12,17 @@ export const Navigation = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                         <li><a>掲示板(仮)</a></li>
-                        <li><a>グループチャット(仮)</a></li>
-                        <li><a>マガジン(仮)</a></li>
+                        <li><a href="/magazine">マガジン(仮)</a></li>
+                        <li><a>ユーザー一覧(仮)</a></li>
                     </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">こくみんポータル(仮)</a>
+                    <a href="/" className="btn btn-ghost normal-case text-xl">こくみんポータル(仮)</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 tabs">
                         <li className="tab"><a>掲示板(仮)</a></li>
-                        <li className="tab tab-active"><a>グループチャット(仮)</a></li>
-                        <li className="tab"><a>マガジン(仮)</a></li>
+                        <li className="tab tab-active"><a>グループチャット(未実装)</a></li>
+                        <li className="tab"><a href="/magazine">マガジン(仮)</a></li>
                     </ul>
                 </div>
                 <div className="navbar-end">
