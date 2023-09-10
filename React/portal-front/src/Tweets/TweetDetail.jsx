@@ -27,7 +27,7 @@ export const TweetDetail = ({ tweetList }) => {
                     <span className="w-10 h-10">
                         <img className="rounded" src={tweet.user.image || "/images/default.jpg"} alt="userimg" />
                     </span>
-                    <Link to={`/users/${tweet.user.id}`} className="leading-10 pl-3 w-1/2 hover:underline"> {/* 修正 */}
+                    <Link to={`/user/${tweet.user.id}`} className="leading-10 pl-3 w-1/2 hover:underline"> {/* 修正 */}
                         <p>{tweet.user.username}</p>
                     </Link>
                 </div>

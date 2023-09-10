@@ -1,16 +1,24 @@
 import { Tweet } from "./Tweet";
 import { CreateModal } from "./CreateModal";
+import { useContext } from "react";
+import {useTweets,TweetProvider} from "../context/tweetContext";
 
-export const Tweets = ({ tweetList }) => {
+const Tweets = () => {
+    const tweets = useTweets();
+
     return (
         <>
-            <div className="divide-y mr-auto ml-auto max-w-5xl p-3">
-                <div className="p-4 text-center">掲示板</div>
-                {tweetList.map((tweet) => (
-                    <Tweet key={tweet.id} tweet={tweet} />
+            <TweetProvider>
+                <div className="divide-y mr-auto ml-auto max-w-5xl p-3">
+                    <div className="p-4 text-center">掲示板</div>
+                    {tweets.map((tweet) => (
+                        <Tweet key={tweet.id} tweet={tweet} />
                     ))}
-            </div>
-            <CreateModal />
+                </div>
+                <CreateModal />
+            </TweetProvider>
         </>
     );
 };
+
+export default Tweets;
