@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Tweet } from './../Tweets/Tweet';
 
-const ENDPOINT_URL = 'http://127.0.0.1:8000/bbs/'
+const ENDPOINT_URL = 'http://127.0.0.1:8000/api/v1/bbs/'
 
 const tweetApi = {
     async getTweets(){
@@ -13,7 +13,7 @@ const tweetApi = {
                 _limit: 30,
             },
         });
-        return tweets;
+        return tweets.data;
     },
     async getReplies(tweetId){
         const replies = await axios

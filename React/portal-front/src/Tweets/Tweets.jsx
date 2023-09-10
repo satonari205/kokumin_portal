@@ -11,6 +11,7 @@ const Tweets = () => {
             <TweetProvider>
                 <div className="divide-y mr-auto ml-auto max-w-5xl p-3">
                     <div className="p-4 text-center">掲示板</div>
+                    {/* {console.log(tweets)} */}
                     {tweets.map((tweet) => (
                         <Tweet key={tweet.id} tweet={tweet} />
                     ))}
