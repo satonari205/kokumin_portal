@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Tweet = ({ tweet }) => {
+const Tweet = ({ tweet }) => {
   return (
     <>
       <div className="p-3">
         <div className="avatar flex justify-start w-1/2 m-2">
         <span className="w-10 h-10">
             <img
-            className="rounded"
-            src={tweet.user.image || "/images/default.jpg"}
-            alt="userimg"
+              className="rounded"
+              src={tweet.user.image || "/images/default.jpg"}
+              alt="userimg"
             />
         </span>
         <Link
@@ -36,3 +36,5 @@ export const Tweet = ({ tweet }) => {
     </>
   );
 };
+
+export default Tweet;

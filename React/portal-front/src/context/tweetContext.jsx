@@ -3,6 +3,8 @@ import tweetApi from "../api/tweet";
 
 const TweetContext = createContext();
 
+const Tweetreducer = [];
+
 const TweetProvider = ({children}) => {
     const [tweets, setTweets] = useState([]);
 
@@ -10,13 +12,13 @@ const TweetProvider = ({children}) => {
         tweetApi.getTweets()
         .then(_tweets => {
             setTweets(_tweets);
-        })},[]);
+    })},[]);
 
     return (
         <TweetContext.Provider value={tweets}>
             {children}
         </TweetContext.Provider>
-        );
+    );
 }
 
 const useTweets = () => useContext(TweetContext);

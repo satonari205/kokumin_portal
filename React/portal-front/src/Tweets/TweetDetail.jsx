@@ -1,15 +1,24 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import {useTweets,TweetProvider} from "../context/tweetContext";
+import todoApi from "../api/tweet";
+import Reply from "./Reply"
 
-export const TweetDetail = ({ tweetList }) => {
-
-    const { tweetId } = useParams(); // URLパラメータからツイートIDを取得
-    const tweet = tweetList.find(tweet => tweet.id === parseInt(tweetId)); // ツイートIDに対応するツイートを検索
+export const TweetDetail = () => {
+    const [replies,setReplies] = useState([]);
+    const tweets = useTweets();
+    const tweet = tweets.find(tweet => tweet.id === parseInt(tweet.id));
 
     if (!tweet) {
         return <div>Loading...</div>;
     }
+
+    todoApi.getReplies(tweet.id)
+    .then(_replies => {
+        setReplies(_replies);
+    });
+
+    console.log(replies);
 
     const formattedDate = new Date(tweet.posted_at).toLocaleString("ja-JP", {
         hour: "numeric",
@@ -57,7 +66,11 @@ export const TweetDetail = ({ tweetList }) => {
                 <div>
                 </div>
                 <div className="divider-y">
-                {/* 返信されたTweetの表示 */}
+                {/* 返信されたRepliesの表示 */}
+                {replies.map((reply) => {
+                    console.log(reply);
+                    <Reply key={reply.id} reply={reply}/>
+                })}
                 </div>
             </div>
         </>

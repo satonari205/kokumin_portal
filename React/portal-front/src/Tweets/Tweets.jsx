@@ -1,6 +1,5 @@
-import { Tweet } from "./Tweet";
+import Tweet from "./Tweet";
 import { CreateModal } from "./CreateModal";
-import { useContext } from "react";
 import {useTweets,TweetProvider} from "../context/tweetContext";
 
 const Tweets = () => {
