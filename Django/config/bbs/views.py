@@ -2,10 +2,13 @@ from django.shortcuts import render
 
 from rest_framework import generics
 
-from .models import Tweet
-from .serializers import BbsSerializer
+from .models import Tweet,Reply
+from .serializers import TweetSerializer,ReplySerializer
 
-
-class BbsListAPIView(generics.ListAPIView):
+class TweetListAPIView(generics.ListAPIView):
     queryset = Tweet.objects.all()
-    serializer_class = BbsSerializer
+    serializer_class = TweetSerializer
+
+class ReplyListAPIView(generics.ListAPIView):
+    queryset = Reply.objects.all()
+    serializer_class = ReplySerializer

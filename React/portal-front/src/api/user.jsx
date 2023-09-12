@@ -7,7 +7,7 @@ const userApi = {
         const user = await axios
         .get(ENDPOINT_URL,{
             params:{
-                id: user_id
+                id: user_id,
             },
         });
         return tweets.data;

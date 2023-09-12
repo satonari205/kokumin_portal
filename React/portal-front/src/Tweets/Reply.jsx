@@ -1,7 +1,13 @@
 const Reply = ({reply}) => {
     return(
         <>
-            <p>{reply}</p>
+            <div>
+                <p>{reply.id}</p>
+                <p>{reply.tweet}</p>
+                <p>{reply.user}</p>
+                <p>{reply.content}</p>
+                <p>{reply.posted_at}</p>
+            </div>
         </>
     );
 }

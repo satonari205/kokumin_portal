@@ -1,22 +1,28 @@
+import { useState,useEffect } from "react";   
 import Tweet from "./Tweet";
 import { CreateModal } from "./CreateModal";
-import {useTweets,TweetProvider} from "../context/tweetContext";
+import tweetApi from "../api/tweet";
 
 const Tweets = () => {
-    const tweets = useTweets();
+    const [tweets,setTweets] = useState([]);
+
+    useEffect(()=>{
+        tweetApi.getTweets()
+        .then(tweets => {
+            console.log(tweets);
+            setTweets(tweets)
+        })
+    },[]);
 
     return (
         <>
-            <TweetProvider>
-                <div className="divide-y mr-auto ml-auto max-w-5xl p-3">
-                    <div className="p-4 text-center">掲示板</div>
-                    {/* {console.log(tweets)} */}
-                    {tweets.map((tweet) => (
-                        <Tweet key={tweet.id} tweet={tweet} />
-                    ))}
-                </div>
-                <CreateModal />
-            </TweetProvider>
+            <div className="divide-y mr-auto ml-auto max-w-5xl p-3">
+                <div className="p-4 text-center">ひろば</div>
+                {tweets.map((tweet) => (
+                    <Tweet key={tweet.id} tweet={tweet} />
+                ))}
+            </div>
+            <CreateModal />
         </>
     );
 };

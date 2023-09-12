@@ -1,26 +1,40 @@
-import { createContext,useContext,useState,useEffect} from "react";
-import tweetApi from "../api/tweet";
+// import { useContext,useReducer,useEffect} from "react";
+// import bbsApi from "../api/tweet";
 
-const TweetContext = createContext();
 
-const Tweetreducer = [];
+// const tweetReducer = (tweets, action) => {
+//     console.log(action);
+//     switch (action.type) {
+//       case "tweet/getTweets":
+//         return [...action.tweets];
+//     //   case "tweet/post":
+//     //     return newTweet;
+//     //     });
+//       default:
+//         return 'hoge';
+//     }
+//   };
 
-const TweetProvider = ({children}) => {
-    const [tweets, setTweets] = useState([]);
+// const TweetProvider = ({children}) => {
+//     const [tweets,dispatch] = useReducer(tweetReducer,[]);
 
-    useEffect(()=>{
-        tweetApi.getTweets()
-        .then(_tweets => {
-            setTweets(_tweets);
-    })},[]);
+//     useEffect(()=>{
+//         bbsApi.getTweets()
+//         .then(tweets => {
+//             dispatch({type: 'tweet/getTweets', tweets: tweets})
+//         })
+//     },[]);
 
-    return (
-        <TweetContext.Provider value={tweets}>
-            {children}
-        </TweetContext.Provider>
-    );
-}
+//     return (
+//         <TweetContext.Provider value={tweets}>
+//             <TweetDispatchContext.Provider value={dispatch}>
+//                 {children}
+//             </TweetDispatchContext.Provider>
+//         </TweetContext.Provider>
+//     );
+// }
 
-const useTweets = () => useContext(TweetContext);
+// const useTweets = () => useContext(TweetContext);
+// const useDispatchTweets = () => useContext(TweetDispatchContext);
 
-export {useTweets,TweetProvider}
+// export {useTweets,useDispatchTweets,TweetProvider}

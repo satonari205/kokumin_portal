@@ -5,5 +5,6 @@ from . import views
 app_name = 'bbs'
 
 urlpatterns = [
-    path('', views.BbsListAPIView.as_view(), name="bbs"),
+    path('tweets/', views.TweetListAPIView.as_view(), name="tweets"),
+    path('replies/', views.ReplyListAPIView.as_view(), name="replies"),
 ]
