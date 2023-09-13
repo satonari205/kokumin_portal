@@ -4,13 +4,13 @@ const ENDPOINT_TWEETS = 'http://127.0.0.1:8000/api/v1/tweets/'
 
 const tweetApi = {
     async getTweet(tweet_id){
-        const responce = await axios
+        const res = await axios
         .get(ENDPOINT_TWEETS,{
             params:{
                 id: tweet_id,
             },
         });
-        return responce.data;
+        return res.data;
     },
     async getTweets(){
         const tweets = await axios

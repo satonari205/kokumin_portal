@@ -3,6 +3,7 @@ import { Link,useParams } from "react-router-dom";
 import tweetApi from "../api/tweet";
 import replyApi from "../api/reply";
 import Reply from "./Reply";
+import MyReply from "./MyReply";
 import ReplyForm from "./ReplyForm";
 
 export const Replies = () => {
@@ -13,23 +14,14 @@ export const Replies = () => {
 
     useEffect(()=>{
         tweetApi.getTweet(tweetId)
-        .then((tweet) => {
-            setTweet(tweet)
+        .then((_tweet) => {
+            setTweet(_tweet[0])
         });
         replyApi.getReplies(tweetId)
-        .then((replies) => {
-            console.log(replies);
-            setReplies(replies)
+        .then((_replies) => {
+            setReplies(_replies)
         });
     },[])
-
-    // const formattedDate = new Date(tweet.posted_at).toLocaleString("ja-JP", {
-    //     hour: "numeric",
-    //     minute: "numeric",
-    //     year: "numeric",
-    //     month: "long",
-    //     day: "numeric",
-    // });
 
     return(
         <>
@@ -50,7 +42,6 @@ export const Replies = () => {
                 <div className="p-4">
                     {tweet.content && !tweet.image && (
                     <a className="pt-4 pb-4">
-                        {console.log(tweet)}
                         {tweet.content}
                     </a>
                     )}
@@ -67,24 +58,29 @@ export const Replies = () => {
                     )}
                 </div>
                 {/* {formattedDate} */}
-                {tweet.posted_at}
+                <span>
+                    投稿日時: {tweet.posted_at}
+                </span>
                 {/* {tweet.posted_at} */}
                 <div className="divider-y">
                 {/* 返信するためのフォーム */}
                 </div>
                 <div>
                 </div>
-                <div className="divider-y">
+                <div>
                 {/* 返信されたRepliesの表示 */}
-                <div className="divide-y mr-auto ml-auto max-w-5xl p-3">
+                {/* <div className="divide-y mr-auto ml-auto max-w-5xl p-3"> */}
                 <ReplyForm />
                 <div className="p-4 text-center">コメント</div>
                     {console.log(replies)}
+                    <div>
                     {replies.map((reply) => (
                         <Reply key={reply.id} reply={reply} />
-                    ))}
+                        ))}
+                    <MyReply />
+                    </div>
                 </div>
-                </div>
+                {/* </div> */}
             </div>
         </>
     )

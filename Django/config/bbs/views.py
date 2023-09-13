@@ -10,12 +10,18 @@ class TweetListAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Tweet.objects.all()
-        tweet = self.request.query_params.get('id', None)
-        if tweet is not None:
-            queryset = queryset.filter(id = )
-        return tweet
+        tweet_id = self.request.query_params.get('id')
+        if tweet_id is not None:
+            queryset = queryset.filter(id = tweet_id)
+        return queryset
 
 class ReplyListAPIView(generics.ListAPIView):
     serializer_class = ReplySerializer
-    queryset = Reply.objects.all()
+
+    def get_queryset(self):
+        queryset = Reply.objects.all()
+        tweet_id = self.request.query_params.get('tweet')
+        if tweet_id is not None:
+            queryset = queryset.filter(tweet = tweet_id)
+        return queryset
 

@@ -1,12 +1,16 @@
 const Reply = ({reply}) => {
     return(
         <>
-            <div>
-                <p>{reply.id}</p>
-                <p>{reply.tweet}</p>
-                <p>{reply.user}</p>
-                <p>{reply.content}</p>
-                <p>{reply.posted_at}</p>
+            <div className="chat chat-start mb-4">
+                <div className="chat-header link">
+                    reply.username
+                <time className="text-xs opacity-50 ml-2">
+                    {reply.posted_at}
+                </time>
+                </div>
+                <div className="chat-bubble">
+                    {reply.content}
+                </div>
             </div>
         </>
     );
