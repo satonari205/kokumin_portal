@@ -6,7 +6,7 @@ import Reply from "./Reply";
 import ReplyForm from "./ReplyForm";
 
 export const Replies = () => {
-    const [tweet,setTweet] = useState("");
+    const [tweet,setTweet] = useState([]);
     const [replies,setReplies] = useState([]);
 
     const { tweetId } = useParams();
@@ -46,6 +46,7 @@ export const Replies = () => {
                         <p className="hover:link">tweet.user.username</p>
                     </Link>
                 </div>
+                {console.log(tweet)}
                 <div className="p-4">
                     {tweet.content && !tweet.image && (
                     <a className="pt-4 pb-4">

@@ -10,7 +10,7 @@ const userApi = {
                 id: user_id,
             },
         });
-        return tweets.data;
+        return user.data;
     },
     async getReplies(tweetId){
         const replies = await axios
