@@ -28,7 +28,7 @@ const Tweet = ({ tweet }) => {
         </a>
         )}
         <div className="flex justify-end pt-3">
-        <Link to={`/reply/${tweet.id}`} className="btn btn-ghost btn-sm mt-3">
+        <Link to={`/replies/${tweet.id}`} className="btn btn-ghost btn-sm mt-3">
             コメントする
         </Link>
         </div>

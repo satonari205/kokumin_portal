@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
     'bbs.apps.BbsConfig',
-    'rest_framework', # Django REST frameworkの追加
+    'drf_multiple_model',
+    'rest_framework',
     'corsheaders',
 ]
 

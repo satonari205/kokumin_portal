@@ -12,7 +12,17 @@ const userApi = {
         });
         return user.data;
     },
-    async Signup(){
+    async login(username,password){
+        const user = await axios
+        .get(ENDPOINT_URL,{
+            params:{
+                username: username,
+                password: password,
+            },
+        });
+        return user.data;
+    },
+    async signup(){
         const newUser = await axios
         .post(ENDPOINT_URL,{
             params:{

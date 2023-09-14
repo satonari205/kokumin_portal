@@ -14,9 +14,9 @@ export const User = () => (
                     </p>
                 </div>
             </div>
-            <div class="tabs mt-8">
-                <a class="tab tab-bordered tab-active tab-lg flex-auto">掲示板（仮）</a>
-                <a class="tab tab-bordered tab-lg flex-auto">マガジン（仮）</a>
+            <div className="tabs mt-8">
+                <a className="tab tab-bordered tab-active tab-lg flex-auto">掲示板（仮）</a>
+                <a className="tab tab-bordered tab-lg flex-auto">マガジン（仮）</a>
             </div>
         </div>
     </>
