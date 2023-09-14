@@ -1,8 +1,14 @@
 from rest_framework import serializers
-from .models import Tweet, Reply
+from .models import Tweet, Reply, User
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields =('id','username','image')
 
 class TweetSerializer(serializers.ModelSerializer):
     posted_at = serializers.DateTimeField(format="%Y/%m/%d %H:%M", read_only=True)
+    user = UserSerializer()
 
     class Meta:
         model = Tweet
@@ -10,6 +16,7 @@ class TweetSerializer(serializers.ModelSerializer):
         
 class ReplySerializer(serializers.ModelSerializer):
     posted_at = serializers.DateTimeField(format="%Y/%m/%d %H:%M", read_only=True)
+    user = UserSerializer()
 
     class Meta:
         model = Reply
