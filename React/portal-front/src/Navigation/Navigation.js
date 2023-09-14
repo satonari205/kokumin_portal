@@ -4,7 +4,7 @@ import {NoticeButton } from "./NoticeButton";
 export const Navigation = () => {
     return (
         <>
-            <div className="navbar sticky top-0 p-4 z-10 bg-white border-b-2 border-gray-100">
+            <div className="navbar py-0 sticky top-0 p-4 z-10 bg-white opacity-90 border-b-2 border-gray-100">
                 <div className="navbar-start">
                     <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -14,6 +14,8 @@ export const Navigation = () => {
                         <li><a>掲示板(仮)</a></li>
                         <li><a href="/magazine">マガジン(仮)</a></li>
                         <li><a>ユーザー一覧(仮)</a></li>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/signup">サインアップ</a></li>
                     </ul>
                     </div>
                     <a href="/" className="btn btn-ghost normal-case text-xl">こくみんポータル(仮)</a>

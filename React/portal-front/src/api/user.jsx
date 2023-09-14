@@ -12,19 +12,17 @@ const userApi = {
         });
         return user.data;
     },
-    async getReplies(tweetId){
-        const replies = await axios
-        .get(ENDPOINT_URL,{
+    async Signup(){
+        const newUser = await axios
+        .post(ENDPOINT_URL,{
             params:{
-                reply_to: tweetId,
+                username: username,
+                nickname: nickname,
+                password: password,
             }
         });
-        return replies;
-    },
-    async post(tweet){
-        const newTweet = await axios.post(ENDPOINT_URL,tweet);
-        return newTweet;
+        return newUser.data;
     },
 }
 
-export default tweetApi;
+export default userApi;

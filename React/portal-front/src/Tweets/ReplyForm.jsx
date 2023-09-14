@@ -1,3 +1,5 @@
+import TextareaAutosize from 'react-textarea-autosize';
+
 const ReplyForm = () => {
     return(
         <>
@@ -8,12 +10,17 @@ const ReplyForm = () => {
                 >
                     ↓ コメントしてみましょう！ ↓
                 </label>
-                <textarea
+                {/* <textarea
                     id="reply"
                     className="textarea h-96 textarea-bordered"
                     placeholder="1万文字まで入力できます"
                 >
-                </textarea>
+                </textarea> */}
+                <TextareaAutosize
+                    id="reply"
+                    className="textarea h-96 textarea-bordered"
+                    placeholder="1万文字まで入力できます"
+                />
                 <div className="flex items-center justify-end">
                     <div className="items-center justify-center bg-grey-lighter">
                         <label className="w-12 flex flex-col items-center px-4 py-2 rounded-lg tracking-wide uppercase border border-gray cursor-pointer">

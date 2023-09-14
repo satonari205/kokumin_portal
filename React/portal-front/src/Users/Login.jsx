@@ -1,9 +1,9 @@
 export const Login = () => {
     return(
-        <div className="max-w-xl mt-10 ml-auto mr-auto">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="text-center lg:text-left">
-                <h1 className="text-5xl font-bold">ログイン</h1>
+        <div className="max-w-sm mt-5 mx-auto">
+            <div>
+                <div className="text-center">
+                <h1 className="text-2xl font-bold">ログイン</h1>
                 <p className="py-6">
                     ログインすると投稿機能が使えるようになります。
                 </p>

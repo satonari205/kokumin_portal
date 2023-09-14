@@ -11,6 +11,9 @@
 # production
 /build
 
+# 仮想環境
+venv_portal/
+
 # misc
 .DS_Store
 .env.local

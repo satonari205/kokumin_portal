@@ -4,7 +4,7 @@ export const Magazine = () => {
       <div className="card max-w-xs bg-base-100 hover:opacity-80 ease-in duration-300">
         <figure>
           <img
-            src="./images/macho.jpg"
+            src="./images/default.jpg"
           />
         </figure>
         <div className="card-body p-2">

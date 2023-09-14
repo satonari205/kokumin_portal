@@ -4,7 +4,7 @@ export const NoticeButton = () => {
     return(
         <>
             {/* 通知一覧画面へ遷移 */}
-            <Link to="/notices" className="btn rounded-full indicator">
+            <Link to="/notices" className="btn btn-sm rounded-lg indicator">
                 <p>通知</p>
                 <span className="indicator-item badge bg-blue-700"></span>
             </Link>
