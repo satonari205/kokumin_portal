@@ -13,7 +13,7 @@ class LoginSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id','username','nickname','password')
 
-class SignupSerializer(serializers.ModelSerializer):
+class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id','username','nickname','password')

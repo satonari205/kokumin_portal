@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from .models import User
-from .serializers import UserSerializer,LoginSerializer,SignupSerializer
-from django.http import HttpResponse, JsonResponse
+
 from rest_framework import generics
+from .serializers import UserSerializer,LoginSerializer,RegisterSerializer
 
 
 class UserListAPIView(generics.ListAPIView):
@@ -23,6 +23,6 @@ class LoginAPIView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = LoginSerializer
 
-class UserCreateAPIView(generics.CreateAPIView):
+class RegisterAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
-    serializer_class= SignupSerializer
+    serializer_class= RegisterSerializer

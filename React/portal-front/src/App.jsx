@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Navigation } from "./Navigation/Navigation";
 import Tweets from "./Tweets/Tweets";
-import Replies from "./Tweets/Replies";
+import Replies from "./Replies/Replies";
 import { Magazines } from "./Magazine/Magazines";
 import { User } from "./Users/User";
 import { Login } from "./Users/Login";

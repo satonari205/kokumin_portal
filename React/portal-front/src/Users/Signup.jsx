@@ -9,16 +9,16 @@ export const Signup = () => {
 
     const navigate = useNavigate();
 
-    userApi.signup(username,nickname,password);
-
+    
     const handleLogin = () => {
-            localStorage.setItem('token', 'user_token');
-            navigate('/');
+        userApi.register(username,nickname,password);
+        localStorage.setItem('token', 'user_token');
+        navigate('/');
     };
 
     return(
-        <div className="max-w-sm mt-5 mx-auto">
-            <div>
+        <div className="max-w-sm mx-auto">
+            <div className="m-4">
                 <div className="text-center">
                 <h1 className="text-2xl font-bold">ユーザー登録</h1>
                 <p className="py-6">

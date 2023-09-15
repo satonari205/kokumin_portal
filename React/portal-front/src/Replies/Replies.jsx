@@ -1,8 +1,7 @@
 import {useEffect,useState} from "react";
 import replyApi from "../api/reply";
-// import TweetDetail from "./TweetDetail";
 import Reply from "./Reply";
-import MyReply from "./MyReply";
+import MyReply from "../Tweets/MyReply";
 import ReplyForm from "./ReplyForm";
 import { useParams,Link } from "react-router-dom";
 
@@ -63,7 +62,7 @@ const Replies = () => {
                 </span>
                 <div>
                     <ReplyForm />
-                        <div className="shadow-inner rounded-lg bg-slate-100 p-3">
+                        <div className="shadow-inner min-h- rounded-lg bg-slate-100 p-3">
                         {replies.map((reply) => (
                             <Reply key={reply.id} reply={reply} />
                         ))}
