@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Navigation } from "./Navigation/Navigation";
 import Tweets from "./Tweets/Tweets";
-import TweetDetail from "./Tweets/TweetDetail";
+import Replies from "./Tweets/Replies";
 import { Magazines } from "./Magazine/Magazines";
 import { User } from "./Users/User";
 import { Login } from "./Users/Login";
@@ -16,7 +16,7 @@ const App = () => {
         <Navigation />
           <Routes>
             <Route path="/" element={<Tweets />} />
-            <Route path="/replies/:tweetId" element={<TweetDetail />} />
+            <Route path="/replies/:tweetId" element={<Replies />} />
             <Route path="/magazine" element={<Magazines />} />
             <Route path="/user/:userId" element={<User />} />
             <Route path="/login" element={<Login />} />

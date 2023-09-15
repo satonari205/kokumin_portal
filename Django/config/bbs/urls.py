@@ -5,5 +5,6 @@ app_name = 'bbs'
 
 urlpatterns = [
     path('tweets/', views.TweetListAPIView.as_view(), name="tweets"),
-    path('replies/<int:pk>/', views.ReplyListAPIView.as_view(), name="replies"),
+    path('replies/', views.TweetAndRepliesAPIView.as_view(), name="replies"),
+    # path('replies/', views.ReplyListAPIView.as_view(), name="replies"),
 ]

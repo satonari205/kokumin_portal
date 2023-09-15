@@ -22,7 +22,7 @@ const userApi = {
         });
         return user.data;
     },
-    async signup(){
+    async signup(username,nickname,password){
         const newUser = await axios
         .post(ENDPOINT_URL,{
             params:{
