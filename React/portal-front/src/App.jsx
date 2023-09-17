@@ -5,7 +5,7 @@ import Replies from "./Replies/Replies";
 import { Magazines } from "./Magazine/Magazines";
 import { User } from "./Users/User";
 import { Login } from "./Users/Login";
-import { Signup } from "./Users/Signup";
+import Register from "./Users/Register";
 import { Notices } from "./Notice/Notices";
 import { NoMatch } from "./NoMatch";
 
@@ -20,7 +20,7 @@ const App = () => {
             <Route path="/magazine" element={<Magazines />} />
             <Route path="/user/:userId" element={<User />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/notices" element={<Notices />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>

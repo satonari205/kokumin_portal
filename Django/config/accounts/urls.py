@@ -1,10 +1,11 @@
-from django.urls import path
+from django.urls import path,include
 from . import views
+from .views import UserList
 
 app_name = 'accounts'
 
 urlpatterns = [
-    path('user/', views.UserListAPIView.as_view(), name="accounts"),
-    path('login/', views.LoginAPIView.as_view(), name="accounts"),
-    path('signup/', views.RegisterAPIView.as_view(), name="accounts"),
+    path('token/', include('djoser.urls')),
+    path('token/', include('djoser.urls.jwt')),
+    path('users/', UserList.as_view()),
 ]

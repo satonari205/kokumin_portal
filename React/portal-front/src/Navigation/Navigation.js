@@ -16,7 +16,7 @@ export const Navigation = () => {
                             <li><a href="/magazine">マガジン(仮)</a></li>
                             <li><a>ユーザー一覧(仮)</a></li>
                             <li><a href="/login">Login</a></li>
-                            <li><a href="/signup">サインアップ</a></li>
+                            <li><a href="/register">サインアップ</a></li>
                         </ul>
                         </div>
                         <a href="/" className="btn btn-ghost normal-case text-xl">こくみんポータル(仮)</a>

@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+#トークンを発行するためのクラス
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -11,13 +12,9 @@ class UserSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','username','nickname','password')
+        fields = ('username', 'password')
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','username','nickname','password')
-
-        # def create(self, validated_data):
-        #     user = User.objects.create_user(**validated_data)
-        #     return user
+        fields = ('username', 'nickname', 'password')

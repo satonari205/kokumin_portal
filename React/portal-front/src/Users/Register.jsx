@@ -1,24 +1,34 @@
-import userApi from "../api/user";
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import {useHistory} from "react";
+import {useCookies} from "react-cookie";
+import {useForm} from "react-hook-form";
 
-export const Signup = () => {
-    const [username, setUsername] = useState('');
-    const [nickname, setNickname] = useState('');
-    const [password, setPassword] = useState('');
+const ENDPOINT_URL = 'http://127.0.0.1:8000/api/v1/'
 
-    const navigate = useNavigate();
+export const Register = () => {
+    // const history = useHistory();
+    // const [cookie,setCookie] = useCookies();
+    // const [register,handleSubmit,watch,errors] = useForm();
 
+    // const getJwt = async (data) => {
+    //     console.log(data);
+    //     await axios.post(ENDPOINT_URL + 'auth/jwt/create',
+    //     {
+    //         username: username,
+    //         nickname: nickname,
+    //         password: password,
+    //     })
+    //     .then(function(response){
+    //         console.log(response.data.access)
+    //         setCookie('accesstoken', response.data.access, { path: '/' }, { httpOnly: true });
+    //         setCookie('refreshtoken', response.data.refresh, { path: '/' }, { httpOnly: true });
+    //         history.push('/');
+    //     })
+    // }
     
-    const handleLogin = () => {
-        userApi.register(username,nickname,password);
-        localStorage.setItem('token', 'user_token');
-        navigate('/');
-    };
-
     return(
         <div className="max-w-sm mx-auto">
-            <div className="m-4">
+            {/* <div className="m-4">
                 <div className="text-center">
                 <h1 className="text-2xl font-bold">ユーザー登録</h1>
                 <p className="py-6">
@@ -26,7 +36,10 @@ export const Signup = () => {
                 </p>
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                <form className="card-body">
+                <form
+                    className="card-body"
+                    onSubmit={handleSubmit(getJwt)}
+                >
                     <div className="form-control">
                     <label className="label">
                         <span className="label-text">Username</span>
@@ -67,15 +80,17 @@ export const Signup = () => {
                     </div>
                     <div className="form-control mt-6">
                     <button
+                    type="submit"
                         className="btn btn-blue-700btn-lg hover:bg-blue-500 bg-blue-700 text-white"
-                        onClick={handleLogin}
                     >
                         登録して始める
                     </button>
                     </div>
                 </form>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };
+
+export default Register;
