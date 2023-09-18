@@ -9,11 +9,17 @@ const Tweets = () => {
     const [cookies] = useCookies();
     console.log(cookies['accesstoken']);
 
+    // const headers = {
+    //         'Authorization': 'Bearer ' + cookies['accesstoken'],
+    //         'Content-Type': 'application/json',
+    //         withCredentials: true,
+    // }
+    const acc = localStorage.getItem('accesstoken'); 
+    console.log(acc);
     const headers = {
-            'Authorization': 'Bearer' + cookies['accesstoken'],
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + acc,
             withCredentials: true,
-
     }
 
     useEffect(()=>{

@@ -9,7 +9,8 @@ export const Login = () => {
     const [username,setUsername] = useState()
     const [password,setPassword] = useState()
     const navigate = useNavigate();
-    const [cookie,setCookie] = useCookies(['accesstoken','refreshtoken']);
+    // const [cookie,setCookie] = useCookies(['accesstoken','refreshtoken']);
+    const [cookie,setCookie] = useCookies();
 
     // JWTでのユーザー認証
     // 1.auth/token/jwt/create/でaccessTokenを発行
@@ -29,6 +30,10 @@ export const Login = () => {
         },
         );
         const { access, refresh } = response.data;
+            console.log('Access Token:', access);
+            console.log('Refresh Token:', refresh);
+            localStorage.setItem('accesstoken',access)
+            localStorage.setItem('refreshtoken',refresh)
             setCookie('accesstoken', access, { path: '/', httpOnly: true });
             setCookie('refreshtoken', refresh, { path: '/', httpOnly: true });
             navigate('/');
