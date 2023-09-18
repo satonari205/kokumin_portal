@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -79,9 +78,27 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
 ]
+
+CORS_ALLOW_HEADERS = [
+    'authorization',
+    'content-type',
+]
+
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
+
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_COOKIE_HTTPONLY = False
 
 ROOT_URLCONF = 'config.urls'
 
