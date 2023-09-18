@@ -1,7 +1,6 @@
 import axios from "axios";
 import {useHistory} from "react";
 import {useCookies} from "react-cookie";
-import {useForm} from "react-hook-form";
 
 const ENDPOINT_URL = 'http://127.0.0.1:8000/api/v1/'
 
@@ -80,7 +79,7 @@ export const Register = () => {
                     </div>
                     <div className="form-control mt-6">
                     <button
-                    type="submit"
+                        type="submit"
                         className="btn btn-blue-700btn-lg hover:bg-blue-500 bg-blue-700 text-white"
                     >
                         登録して始める

@@ -1,17 +1,30 @@
-import { useState,useEffect } from "react";   
+import { useState,useEffect } from "react";
+import {useCookies} from "react-cookie";
 import Tweet from "./Tweet";
 import { CreateModal } from "./CreateModal";
 import tweetApi from "../api/tweet";
 
 const Tweets = () => {
     const [tweets,setTweets] = useState([]);
+    const [cookies] = useCookies();
+    console.log(cookies['accesstoken']);
+
+    const headers = {
+            'Authorization': 'Bearer' + cookies['accesstoken'],
+            'Content-Type': 'application/json',
+            withCredentials: true,
+
+    }
 
     useEffect(()=>{
-        tweetApi.getTweets()
+        tweetApi.getTweets(headers)
         .then(tweets => {
             console.log(tweets);
             setTweets(tweets)
         })
+        .catch(error => {
+            console.error('Error fetching tweets:', error);
+        });
     },[]);
 
     return (
