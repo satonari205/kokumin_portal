@@ -1,14 +1,15 @@
 import axios from "axios";
+import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
-import {useForm} from "react-hook-form";
 
 const ENDPOINT_URL = 'http://127.0.0.1:8000/api/v1/'
 
 export const Login = () => {
+    const [username,setUsername] = useState()
+    const [password,setPassword] = useState()
     const navigate = useNavigate();
     const [cookie,setCookie] = useCookies();
-    const {register,handleSubmit} = useForm();
 
     // JWTでのユーザー認証
     // 1.auth/token/jwt/create/でaccessTokenを発行
@@ -17,7 +18,7 @@ export const Login = () => {
     // 4.ログアウト時はrefreshTokenで消しこむ
     const getJwt = async (data) => {
         console.log(data);
-        await axios.post(ENDPOINT_URL + 'auth/token/users/',
+        await axios.post(ENDPOINT_URL + 'auth/token/jwt/create/',
         {
             username: data.username,
             password: data.password,
@@ -51,7 +52,7 @@ export const Login = () => {
                     <input
                         placeholder="Username"
                         className="input input-bordered"
-                        {...register('username',{ required: true })}
+                        onChange={() => setUsername(e.target.value)}
                     />
                     </div>
                     <div className="form-control">
@@ -61,7 +62,7 @@ export const Login = () => {
                     <input
                         placeholder="password"
                         className="input input-bordered"
-                        {...register('password',{ required: true })}
+                        onChange={() => setPassword(e.target.value)}
                     />
                     <label className="label">
                     </label>
