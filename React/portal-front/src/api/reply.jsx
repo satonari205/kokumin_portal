@@ -1,11 +1,9 @@
-import axios from 'axios';
-
-const ENDPOINT_REPLIES = 'http://127.0.0.1:8000/api/v1/replies/'
+import auth from './auth';
 
 const replyApi = {
     async getReplies(reply_id){
-        const res = await axios
-        .get(ENDPOINT_REPLIES,{
+        const res = await auth
+        .get('replies/',{
             params:{
                 tweet: reply_id,
             }
@@ -13,7 +11,8 @@ const replyApi = {
         return res.data;
     },
     async post(reply){
-        const newReply = await axios.post(ENDPOINT_REPLIES);
+        const newReply = await auth
+        .post('replies/');
         return newReply;
     },
 }

@@ -34,8 +34,8 @@ export const Login = () => {
             console.log('Refresh Token:', refresh);
             localStorage.setItem('accesstoken',access)
             localStorage.setItem('refreshtoken',refresh)
-            setCookie('accesstoken', access, { path: '/', httpOnly: true });
-            setCookie('refreshtoken', refresh, { path: '/', httpOnly: true });
+            // setCookie('accesstoken', access, { path: '/', httpOnly: true });
+            // setCookie('refreshtoken', refresh, { path: '/', httpOnly: true });
             navigate('/');
         }
         catch (error) {

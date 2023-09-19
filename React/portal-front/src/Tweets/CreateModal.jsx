@@ -1,7 +1,25 @@
-export const CreateModal = () => {
+import tweetApi from "../api/tweet";
+import {useNavigate} from "react-router-dom";
+import {useForm} from "react-hook-form";
+
+const CreateModal = () => {
+    const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
+
+    const onSubmit = (data) => {
+        tweetApi.postTweet(data)
+        .then(data => {
+            console.log(data);
+            navigate("/");
+        })
+        .catch(data => {
+            console.log(data);
+        }
+        )
+    }
+
     return(
         <>
-            {/* You can open the modal using ID.showModal() method */}
             <button
                 className="btn btn-md md:btn-lg hover:bg-blue-500 bg-blue-700 text-white fixed bottom-4 right-4 xl:right-52 text-lg pl-8 pr-8"
                 onClick={()=>window.my_modal_4.showModal()}
@@ -9,10 +27,19 @@ export const CreateModal = () => {
                 投稿
             </button>
             <dialog id="my_modal_4" className="modal">
-            <form method="dialog" className="modal-box max-w-5xl">
+            <form
+                method="dialog"
+                className="modal-box max-w-5xl"
+                onSubmit={handleSubmit(onSubmit)}
+            >
                 <h3 className="font-bold text-lg">投稿してみましょう！</h3>
                 <button className="btn btn-sm btn-circle btn-ghost absolute right-4 top-5">✕</button>
-                <textarea placeholder="1万文字まで書き込めます。" className="textarea text-lg focus:outline-none w-full max-w-5xl h-96 mt-5" ></textarea>
+                <textarea
+                    placeholder="1万文字まで書き込めます。"
+                    className="textarea text-lg focus:outline-none w-full max-w-5xl h-96 mt-5"
+                    {...register('content')}
+                >
+                </textarea>
                 <div className="flex flex-wrap flex-col  md:flex-row md:justify-between">
                     <div className="flex items-center gap-4">
                         <div className="items-center justify-center bg-grey-lighter">
@@ -21,7 +48,11 @@ export const CreateModal = () => {
                                 <svg className="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                                 </svg>
-                                <input type='file' className="hidden" />
+                                <input
+                                    type='file'
+                                    className="hidden"
+                                    {...register('image1')}
+                                    />
                             </label>
                         </div>
                         <div className="items-center justify-center bg-grey-lighter">
@@ -30,7 +61,11 @@ export const CreateModal = () => {
                                 <svg className="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                                 </svg>
-                                <input type='file' className="hidden" />
+                                <input
+                                    type='file'
+                                    className="hidden"
+                                    {...register('image2')}
+                                />
                             </label>
                         </div>
                     </div>
@@ -41,3 +76,5 @@ export const CreateModal = () => {
         </>
     );
 };
+
+export default CreateModal;
