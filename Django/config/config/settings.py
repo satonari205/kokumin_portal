@@ -78,6 +78,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
@@ -85,6 +88,7 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_HEADERS = [
     'authorization',
     'content-type',
+    'withCredentials',
 ]
 
 CORS_ALLOW_METHODS = (
@@ -95,8 +99,6 @@ CORS_ALLOW_METHODS = (
     "POST",
     "PUT",
 )
-
-CORS_ALLOW_CREDENTIALS = True
 
 CSRF_COOKIE_HTTPONLY = False
 

@@ -7,7 +7,7 @@ import tweetApi from "../api/tweet";
 const Tweets = () => {
     const [tweets,setTweets] = useState([]);
     const [cookies] = useCookies();
-    console.log(cookies['accesstoken']);
+    // console.log(cookies['accesstoken']);
 
     // const headers = {
     //         'Authorization': 'Bearer ' + cookies['accesstoken'],
@@ -18,8 +18,8 @@ const Tweets = () => {
     console.log(acc);
     const headers = {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + acc,
-            withCredentials: true,
+            'Authorization': `Bearer ${acc}`,
+            'withCredentials': true,
     }
 
     useEffect(()=>{
