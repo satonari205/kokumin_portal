@@ -1,40 +1,36 @@
+import axios from "axios";
 import { useState,useEffect } from "react";
 import Tweet from "./Tweet";
 import CreateModal from "./CreateModal";
-import {auth,headers} from "../api/auth";
+import {headers} from "../api/auth";
 
 const Tweets = () => {
     const [tweets,setTweets] = useState([]);
 
+    const base_URL = 'http://127.0.0.1:8000/api/v1/';
+
     const acc = localStorage.getItem('accesstoken');
     console.log(acc);
-    debugger
 
     if(acc){
         headers['Authorization'] = 'JWT ' + acc;
     }
-    debugger
 
     useEffect(()=>{
-        debugger
-        const tweetList = async () => {
-            await auth.get('tweets/',{
+            axios.get(base_URL + 'tweets/',{
             params:{
                 _sort: '-posted_at',
                 _limit: 30,
             },
+            headers: headers,
             })
             .then(response => {
                 setTweets(response.data);
-                debugger
             })
             .catch(error => {
                 console.error('Error fetching tweets:', error);
-                debugger
             })
-        }
-        tweetList();
-    },[]);
+        },[]);
 
     return (
         <>

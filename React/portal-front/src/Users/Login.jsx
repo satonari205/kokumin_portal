@@ -1,49 +1,51 @@
 import {auth} from "../api/auth";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-// import {useCookies} from "react-cookie";
+import {useCookies} from "react-cookie";
 
 export const Login = () => {
     const [username,setUsername] = useState()
     const [password,setPassword] = useState()
     const navigate = useNavigate();
-    // const [cookie,setCookie] = useCookies(['accesstoken','refreshtoken']);
+    const [cookie,setCookie] = useCookies('');
 
     const login = async () => {
         console.log(username);
-        try {
         const response = await auth
         .post('auth/token/jwt/create/',
             {
                 username: username,
                 password: password,
             },
-        );
-        const { access, refresh } = response.data;
-            console.log('Access Token:', access);
+        ).then(response => {
+            console.log(response.data);
+            const { refresh, access } = response.data;
             console.log('Refresh Token:', refresh);
-            localStorage.setItem('accesstoken',access)
-            localStorage.setItem('refreshtoken',refresh)
-            // setCookie('accesstoken', access, { path: '/', httpOnly: true });
-            // setCookie('refreshtoken', refresh, { path: '/', httpOnly: true });
-            return Promise.resolve();
-        }
-        catch (error) {
+            console.log('Access Token:', access);
+            localStorage.setItem('accesstoken',access);
+            localStorage.setItem('refreshtoken',refresh);
+            setCookie(
+                'refreshtoken',
+                refresh,
+                { httpOnly: true }
+            );
+            setCookie(
+                'accesstoken',
+                access,
+                { httpOnly: true }
+            );
+            navigate('/');
+        })
+        .catch(error => {
             console.error('Login failed:', error);
             alert('EmailかPasswordが違います');
-            return Promise.reject(error);
-        }
+        })
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-            await login();
-            navigate('/');
-        } catch (error) {
-            // ログイン失敗時の処理
-            navigate('/login');
-        }
+        setCookie('test',username);
+        login();
     };
 
     return(

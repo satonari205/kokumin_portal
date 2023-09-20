@@ -1,4 +1,4 @@
-import tweetApi from "../api/tweet";
+import {auth,headers} from "axios";
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 
@@ -9,7 +9,7 @@ const CreateModal = () => {
     const navigate = useNavigate();
 
     const createTweet = (data) => {
-
+        navigate('/');
     }
 
     return(

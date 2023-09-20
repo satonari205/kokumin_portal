@@ -12,9 +12,9 @@
 /build
 
 # 仮想環境
-../Django/venv_portal/
+./venv_portal/
 
-__pycache__
+__pycache__/
 *.py[cod]
 
 # misc
