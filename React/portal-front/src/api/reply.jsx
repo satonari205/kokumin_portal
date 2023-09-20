@@ -1,4 +1,4 @@
-import auth from './auth';
+import {auth} from './auth';
 
 const replyApi = {
     async getReplies(reply_id){

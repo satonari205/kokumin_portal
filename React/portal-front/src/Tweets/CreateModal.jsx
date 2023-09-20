@@ -1,21 +1,15 @@
 import tweetApi from "../api/tweet";
+import { useState } from "react";
 import {useNavigate} from "react-router-dom";
-import {useForm} from "react-hook-form";
 
 const CreateModal = () => {
-    const { register, handleSubmit } = useForm();
+    const [content,setContent] = useState();
+    // const [image1,setImage1] = useState();
+    // const [image2,setImage2] = useState();
     const navigate = useNavigate();
 
-    const onSubmit = (data) => {
-        tweetApi.postTweet(data)
-        .then(data => {
-            console.log(data);
-            navigate("/");
-        })
-        .catch(data => {
-            console.log(data);
-        }
-        )
+    const createTweet = (data) => {
+
     }
 
     return(
@@ -30,14 +24,14 @@ const CreateModal = () => {
             <form
                 method="dialog"
                 className="modal-box max-w-5xl"
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={createTweet}
             >
                 <h3 className="font-bold text-lg">投稿してみましょう！</h3>
                 <button className="btn btn-sm btn-circle btn-ghost absolute right-4 top-5">✕</button>
                 <textarea
                     placeholder="1万文字まで書き込めます。"
                     className="textarea text-lg focus:outline-none w-full max-w-5xl h-96 mt-5"
-                    {...register('content')}
+                    onChange={(e)=>setContent(e.target.value)}
                 >
                 </textarea>
                 <div className="flex flex-wrap flex-col  md:flex-row md:justify-between">
@@ -51,8 +45,8 @@ const CreateModal = () => {
                                 <input
                                     type='file'
                                     className="hidden"
-                                    {...register('image1')}
-                                    />
+                                    // onChange={(e)=>setimage1(e.target.value)}
+                                />
                             </label>
                         </div>
                         <div className="items-center justify-center bg-grey-lighter">
@@ -64,7 +58,7 @@ const CreateModal = () => {
                                 <input
                                     type='file'
                                     className="hidden"
-                                    {...register('image2')}
+                                    // onChange={(e)=>setImage2(e.target.value)}
                                 />
                             </label>
                         </div>

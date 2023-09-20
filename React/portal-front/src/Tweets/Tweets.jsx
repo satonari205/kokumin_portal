@@ -1,23 +1,39 @@
 import { useState,useEffect } from "react";
-// import {useCookies} from "react-cookie";
 import Tweet from "./Tweet";
 import CreateModal from "./CreateModal";
-import tweetApi from "../api/tweet";
+import {auth,headers} from "../api/auth";
 
 const Tweets = () => {
     const [tweets,setTweets] = useState([]);
-    // const [cookies] = useCookies();
-    // console.log(cookies['accesstoken']);
+
+    const acc = localStorage.getItem('accesstoken');
+    console.log(acc);
+    debugger
+
+    if(acc){
+        headers['Authorization'] = 'JWT ' + acc;
+    }
+    debugger
 
     useEffect(()=>{
-        tweetApi.getTweets()
-        .then(tweets => {
-            console.log(tweets);
-            setTweets(tweets)
-        })
-        .catch(error => {
-            console.error('Error fetching tweets:', error);
-        })
+        debugger
+        const tweetList = async () => {
+            await auth.get('tweets/',{
+            params:{
+                _sort: '-posted_at',
+                _limit: 30,
+            },
+            })
+            .then(response => {
+                setTweets(response.data);
+                debugger
+            })
+            .catch(error => {
+                console.error('Error fetching tweets:', error);
+                debugger
+            })
+        }
+        tweetList();
     },[]);
 
     return (

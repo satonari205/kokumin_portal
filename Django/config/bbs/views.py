@@ -2,8 +2,8 @@ from .models import Tweet,Reply
 from .serializers import TweetSerializer,ReplySerializer
 
 from rest_framework.generics import ListAPIView,CreateAPIView
-from drf_multiple_model.views import ObjectMultipleModelAPIView
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
@@ -11,6 +11,20 @@ from django.shortcuts import get_object_or_404
 class TweetListAPIView(ListAPIView):
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
+
+class TweetCreateAPIView(CreateAPIView):
+    serializer_class = TweetSerializer
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer_data = request.data.copy()
+        serializer_data['user'] = request.user.id
+
+        serializer = self.get_serializer(data=serializer_data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 class TweetAndRepliesAPIView(APIView):
     def get(self, request):
@@ -26,6 +40,3 @@ class TweetAndRepliesAPIView(APIView):
             "Reply": reply_serializer.data
         }
         return Response(data, status=status.HTTP_200_OK)
-
-class TweetCreateAPIView(CreateAPIView):
-    serializer_class = TweetSerializer

@@ -1,33 +1,23 @@
-import axios from "axios";
+import {auth} from "../api/auth";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useCookies} from "react-cookie";
-
-const ENDPOINT_URL = 'http://127.0.0.1:8000/api/v1/'
+// import {useCookies} from "react-cookie";
 
 export const Login = () => {
     const [username,setUsername] = useState()
     const [password,setPassword] = useState()
     const navigate = useNavigate();
     // const [cookie,setCookie] = useCookies(['accesstoken','refreshtoken']);
-    const [cookie,setCookie] = useCookies();
 
-    // JWTでのユーザー認証
-    // 1.auth/token/jwt/create/でaccessTokenを発行
-    // 2.auth/token/users/me/にaccessTokenを渡してユーザー情報を取得
-    // 3.アクセストークンをuseCookieにしまってグローバルに管理
-    // 4.アクセストークンをauth/token/jwt/verify/で認証
-    // 5.ログアウト時はrefreshTokenで消しこむ
-
-    const getToken = async () => {
+    const login = async () => {
         console.log(username);
         try {
-        const response = await axios
-        .post(ENDPOINT_URL + 'auth/token/jwt/create/',
-        {
-            username: username,
-            password: password,
-        },
+        const response = await auth
+        .post('auth/token/jwt/create/',
+            {
+                username: username,
+                password: password,
+            },
         );
         const { access, refresh } = response.data;
             console.log('Access Token:', access);
@@ -36,17 +26,26 @@ export const Login = () => {
             localStorage.setItem('refreshtoken',refresh)
             // setCookie('accesstoken', access, { path: '/', httpOnly: true });
             // setCookie('refreshtoken', refresh, { path: '/', httpOnly: true });
-            navigate('/');
+            return Promise.resolve();
         }
         catch (error) {
-        console.error('Login failed:', error);
-        alert('EmailかPasswordが違います');
+            console.error('Login failed:', error);
+            alert('EmailかPasswordが違います');
+            return Promise.reject(error);
         }
     };
-    const handleSubmit = (e) =>{
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        getToken();
-    }
+        try {
+            await login();
+            navigate('/');
+        } catch (error) {
+            // ログイン失敗時の処理
+            navigate('/login');
+        }
+    };
+
     return(
         <div className="max-w-sm mt-5 mx-auto">
             <div>

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import {NoticeButton } from "./NoticeButton";
+import {NoticeButton} from "./NoticeButton";
+import Logout from "./Logout";
 
 export const Navigation = () => {
 
@@ -17,6 +17,7 @@ export const Navigation = () => {
                             <li><a>ユーザー一覧(仮)</a></li>
                             <li><a href="/login">Login</a></li>
                             <li><a href="/register">サインアップ</a></li>
+                            <Logout />
                         </ul>
                         </div>
                         <a href="/" className="btn btn-ghost normal-case text-xl">こくみんポータル(仮)</a>
