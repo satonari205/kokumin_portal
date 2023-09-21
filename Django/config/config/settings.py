@@ -52,21 +52,23 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'accounts.authenticate.CookieHandlerJWTAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
 
 SIMPLE_JWT = {
+    # のちに10分にする
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=3),
+    # のちに一日にする
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
     'AUTH_HEADER_TYPES': ('JWT',),
-    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
 }
 
 AUTH_USER_MODEL = 'accounts.User'
 
-
 MIDDLEWARE = [
+    'config.middleware.SameSiteMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -79,6 +81,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
+
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
@@ -99,6 +102,9 @@ CORS_ALLOW_METHODS = (
     "POST",
     "PUT",
 )
+
+SESSION_COOKIE_SAMESITE = 'Lax' # default='Lax'
+SESSION_COOKIE_SECURE = True
 
 CSRF_COOKIE_HTTPONLY = False
 

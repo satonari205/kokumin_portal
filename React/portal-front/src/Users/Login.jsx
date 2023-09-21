@@ -1,18 +1,16 @@
-import {auth} from "../api/auth";
+import auth from "../api/auth";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useCookies} from "react-cookie";
 
 export const Login = () => {
     const [username,setUsername] = useState()
     const [password,setPassword] = useState()
     const navigate = useNavigate();
-    const [cookie,setCookie] = useCookies('');
 
     const login = async () => {
-        console.log(username);
         const response = await auth
-        .post('auth/token/jwt/create/',
+        .post('auth/cookie/create',
+        // .post('auth/token/jwt/create/',
             {
                 username: username,
                 password: password,
@@ -22,18 +20,8 @@ export const Login = () => {
             const { refresh, access } = response.data;
             console.log('Refresh Token:', refresh);
             console.log('Access Token:', access);
-            localStorage.setItem('accesstoken',access);
-            localStorage.setItem('refreshtoken',refresh);
-            setCookie(
-                'refreshtoken',
-                refresh,
-                { httpOnly: true }
-            );
-            setCookie(
-                'accesstoken',
-                access,
-                { httpOnly: true }
-            );
+            // localStorage.setItem('accesstoken',access);
+            // localStorage.setItem('refreshtoken',refresh);
             navigate('/');
         })
         .catch(error => {
@@ -44,7 +32,6 @@ export const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setCookie('test',username);
         login();
     };
 

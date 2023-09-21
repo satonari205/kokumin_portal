@@ -1,11 +1,22 @@
-from django.urls import path,include
-from . import views
-from .views import UserList
+from django.urls import path
 
+from .views import (
+    csrf,
+    TokenObtainView,
+    LoginUserView,
+    RegisterView,
+    refresh_get,
+    TokenRefresh,
+    LogoutView,
+)
 app_name = 'accounts'
 
 urlpatterns = [
-    path('token/', include('djoser.urls')),
-    path('token/', include('djoser.urls.jwt')),
-    path('users/', UserList.as_view()),
+    path('csrf/create', csrf),
+    path('cookie/create', TokenObtainView.as_view(), name='jwtcreate'),
+    path('cookie/refresh', refresh_get),
+    path('cookie/newtoken', TokenRefresh.as_view(), name='jwtrefresh'),
+    path('register/', RegisterView.as_view(), name='create'),
+    path('login/', LoginUserView.as_view(), name='loginuser'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

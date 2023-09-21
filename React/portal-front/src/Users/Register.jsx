@@ -1,7 +1,3 @@
-import axios from "axios";
-import {useHistory} from "react";
-import {useCookies} from "react-cookie";
-
 const ENDPOINT_URL = 'http://127.0.0.1:8000/api/v1/'
 
 export const Register = () => {

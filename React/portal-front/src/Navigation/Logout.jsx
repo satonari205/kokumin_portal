@@ -4,8 +4,8 @@ const Logout = () => {
     const navigate = useNavigate();
 
     const logout = () => {
-        localStorage.removeItem('accesstoken');
-        localStorage.removeItem('refreshtoken');
+        // localStorage.removeItem('accesstoken');
+        // localStorage.removeItem('refreshtoken');
         navigate('/login');
     }
 
