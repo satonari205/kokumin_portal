@@ -1,10 +1,11 @@
 from django.urls import path
-from bbs.views import TweetListAPIView, TweetCreateAPIView, TweetAndRepliesAPIView
+from bbs.views import TweetViewSet, RepliesAPIView
+from rest_framework.routers import DefaultRouter
 
-app_name = 'bbs'
+router = DefaultRouter()
+router.register('bbs', TweetViewSet)
 
 urlpatterns = [
-    path('tweets/', TweetListAPIView.as_view(), name="tweets"),
-    path('tweets/create', TweetCreateAPIView.as_view(), name="post"),
-    path('replies/', TweetAndRepliesAPIView.as_view(), name="replies"),
+    path('tweets/', TweetViewSet.as_view(), name="tweets"),
+    path('replies/', RepliesAPIView.as_view(), name="replies"),
 ]
