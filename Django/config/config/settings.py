@@ -38,12 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'bbs',
-    'drf_multiple_model',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'rest_framework_simplejwt.token_blacklist',
+    # 'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
-    'djoser',
+    'dj_rest_auth'
 ]
 
 REST_FRAMEWORK = {
@@ -52,6 +52,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ]
 }
 
@@ -62,6 +63,15 @@ SIMPLE_JWT = {
     # のちに一日にする
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
     'AUTH_HEADER_TYPES': ('JWT',),
+}
+
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_COOKIE': 'accesstoken',
+    'JWT_AUTH_REFRESH_COOKIE': 'refreshtoken',
+    'JWT_AUTH_SECURE': True,
+    'JWT_AUTH_HTTPONLY': True,
+    'JWT_AUTH_SAMESITE': 'None',
 }
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -101,10 +111,7 @@ CORS_ALLOW_METHODS = (
     "PUT",
 )
 
-SESSION_COOKIE_SAMESITE = 'Lax'
-SESSION_COOKIE_SECURE = True
-
-CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_HTTPONLY = True
 
 ROOT_URLCONF = 'config.urls'
 
