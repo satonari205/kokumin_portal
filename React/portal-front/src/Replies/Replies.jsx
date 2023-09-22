@@ -19,7 +19,9 @@ const Replies = () => {
             setTweet(_replies.Tweet)
             setReplies(_replies.Reply)
         });
-    },[])
+    },[tweetId])
+
+    debugger
 
     console.log(user);
     console.log(tweet);

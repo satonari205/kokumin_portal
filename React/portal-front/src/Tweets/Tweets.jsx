@@ -1,4 +1,4 @@
-import auth from "../api/auth";
+import axios from "axios";
 import { useState,useEffect } from "react";
 import Tweet from "./Tweet";
 import CreateModal from "./CreateModal";
@@ -6,12 +6,19 @@ import CreateModal from "./CreateModal";
 const Tweets = () => {
     const [tweets,setTweets] = useState([]);
 
+    const acc = localStorage.getItem('accesstoken');
+
     useEffect(()=>{
-            auth.get('tweets/',{
+            axios.get('tweets/',{
             params:{
                 _sort: '-posted_at',
                 _limit: 30,
             },
+            headers:{
+                'Authorization': `JWT ${acc}`,
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
             })
             .then(response => {
                 setTweets(response.data);

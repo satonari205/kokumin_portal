@@ -9,8 +9,7 @@ export const Login = () => {
 
     const login = async () => {
         const response = await auth
-        .post('auth/cookie/create',
-        // .post('auth/token/jwt/create/',
+        .post('auth/jwt/create/',
             {
                 username: username,
                 password: password,
@@ -20,8 +19,8 @@ export const Login = () => {
             const { refresh, access } = response.data;
             console.log('Refresh Token:', refresh);
             console.log('Access Token:', access);
-            // localStorage.setItem('accesstoken',access);
-            // localStorage.setItem('refreshtoken',refresh);
+            localStorage.setItem('accesstoken',access);
+            localStorage.setItem('refreshtoken',refresh);
             navigate('/');
         })
         .catch(error => {

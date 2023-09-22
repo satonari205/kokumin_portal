@@ -1,22 +1,15 @@
 from .models import Tweet,Reply
 from .serializers import TweetSerializer,ReplySerializer
 
-from rest_framework import viewsets
+from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 
-class TweetViewSet(viewsets.ReadOnlyModelViewSet):
+class TweetListAPIView(generics.ListAPIView):
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
-
-class TweetViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Tweet.objects.all()
-    serializer_class = TweetSerializer
-
-    def list():
-        return
 
 class RepliesAPIView(APIView):
     def get(self, request):
@@ -32,5 +25,3 @@ class RepliesAPIView(APIView):
             "Reply": reply_serializer.data
         }
         return Response(data, status=status.HTTP_200_OK)
-    
-    

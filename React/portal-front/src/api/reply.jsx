@@ -6,8 +6,9 @@ const replyApi = {
         .get('replies/',{
             params:{
                 tweet: reply_id,
-            }
+            },
         });
+        debugger
         return res.data;
     },
     async post(reply){

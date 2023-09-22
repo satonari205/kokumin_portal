@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'drf_multiple_model',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
-    'rest_framework.authtoken',
     'djoser',
 ]
 
@@ -51,12 +51,12 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'accounts.authenticate.CookieHandlerJWTAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
 
 SIMPLE_JWT = {
+    "TOKEN_OBTAIN_SERIALIZER": "accounts.serializers.MyTokenObtainPairSerializer",
     # のちに10分にする
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=3),
     # のちに一日にする
@@ -67,7 +67,6 @@ SIMPLE_JWT = {
 AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
-    'config.middleware.SameSiteMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -102,7 +101,7 @@ CORS_ALLOW_METHODS = (
     "PUT",
 )
 
-SESSION_COOKIE_SAMESITE = 'Lax' # default='Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_SECURE = True
 
 CSRF_COOKIE_HTTPONLY = False
