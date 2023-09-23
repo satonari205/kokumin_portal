@@ -1,24 +1,23 @@
 import axios from "axios";
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000/api/';
-axios.defaults.withCredentials = true;
-axios.defaults.headers['Content-Type'] = 'application/json';
+const baseURL = 'http://127.0.0.1:8000/api/';
+
+let headers = {
+    'Content-Type': 'application/json',
+}
 
 const acc = localStorage.getItem('accesstoken');
-
-let headers = {}
-
+console.log(acc);
 if(acc){
     headers += {
         'Autholization': `JWT ${acc}`,
     }
 }
 
-console.log(headers);
-debugger
-
 const auth = axios.create({
+    baseURL: baseURL,
     headers: headers,
+    withCredentials: true,
 });
 
-export default auth;
+export {auth,headers};

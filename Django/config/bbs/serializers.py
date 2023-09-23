@@ -6,14 +6,21 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields =('id','username','image')
 
-class TweetSerializer(serializers.ModelSerializer):
+class TweetListSerializer(serializers.ModelSerializer):
     posted_at = serializers.DateTimeField(format="%Y/%m/%d %H:%M", read_only=True)
     user = UserSerializer()
 
     class Meta:
         model = Tweet
         fields = ('id', 'user', 'content', 'posted_at', 'image1', 'image2')
-        
+
+class TweetSerializer(serializers.ModelSerializer):
+    posted_at = serializers.DateTimeField(format="%Y/%m/%d %H:%M", read_only=True)
+
+    class Meta:
+        model = Tweet
+        fields = ('id', 'user', 'content', 'posted_at', 'image1', 'image2')
+
 class ReplySerializer(serializers.ModelSerializer):
     posted_at = serializers.DateTimeField(format="%Y/%m/%d %H:%M", read_only=True)
     user = UserSerializer()
@@ -22,3 +29,9 @@ class ReplySerializer(serializers.ModelSerializer):
         model = Reply
         fields = ('id','tweet','user','content','posted_at','image')
 
+class ReplyCreateSerializer(serializers.ModelSerializer):
+    posted_at = serializers.DateTimeField(format="%Y/%m/%d %H:%M", read_only=True)
+
+    class Meta:
+        model = Reply
+        fields = ('id','tweet','user','content','posted_at','image')

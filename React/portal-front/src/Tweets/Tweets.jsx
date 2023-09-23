@@ -6,10 +6,11 @@ import CreateModal from "./CreateModal";
 const Tweets = () => {
     const [tweets,setTweets] = useState([]);
 
+    const baseURL = 'http://127.0.0.1:8000/api/';
     const acc = localStorage.getItem('accesstoken');
 
     useEffect(()=>{
-            axios.get('tweets/',{
+            axios.get(baseURL + 'tweets/',{
             params:{
                 _sort: '-posted_at',
                 _limit: 30,

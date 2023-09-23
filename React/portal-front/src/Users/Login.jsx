@@ -1,26 +1,32 @@
-import auth from "../api/auth";
+import {auth,headers} from "../api/auth";
 import {useState} from "react";
+import { useContext } from "react";
 import {useNavigate} from "react-router-dom";
+// import { UserContext } from "../context/userContext";
+
+const baseURL = 'http://127.0.0.1:8000/api/';
 
 export const Login = () => {
     const [username,setUsername] = useState()
     const [password,setPassword] = useState()
+    // const {user,setUser} = useContext(UserContext);
     const navigate = useNavigate();
 
     const login = async () => {
         const response = await auth
-        .post('auth/jwt/create/',
+        .post(baseURL + 'dj-rest-auth/login/',
             {
                 username: username,
                 password: password,
             },
         ).then(response => {
             console.log(response.data);
-            const { refresh, access } = response.data;
+            const { refresh, access, user } = response.data;
             console.log('Refresh Token:', refresh);
             console.log('Access Token:', access);
             localStorage.setItem('accesstoken',access);
             localStorage.setItem('refreshtoken',refresh);
+            localStorage.setItem('user_id',user.pk);
             navigate('/');
         })
         .catch(error => {

@@ -21,12 +21,6 @@ const Replies = () => {
         });
     },[tweetId])
 
-    debugger
-
-    console.log(user);
-    console.log(tweet);
-    console.log(replies);
-
     return(
         <>
             <div className="mr-auto ml-auto max-w-5xl p-3">
@@ -37,7 +31,7 @@ const Replies = () => {
                         <img className="rounded" src={"/images/default.jpg"} alt="userimg" />
                     </span>
                     <Link to={`/user/${user.id}`} className="leading-10 pl-3 w-1/2 hover:underline">
-                        <p className="hover:link">{user.username}</p>
+                        <p className="hover:link">{user.nickname}</p>
                     </Link>
                 </div>
                 <div className="p-4">
@@ -63,7 +57,7 @@ const Replies = () => {
                     投稿日時: {tweet.posted_at}
                 </span>
                 <div>
-                    <ReplyForm />
+                    <ReplyForm tweetId={tweetId}/>
                         <div className="shadow-inner min-h- rounded-lg bg-slate-100 p-3">
                         {replies.map((reply) => (
                             <Reply key={reply.id} reply={reply} />

@@ -1,14 +1,25 @@
-import {auth,headers} from "axios";
+import {auth,headers} from "../api/auth";
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
+// import {UserContext} from "../context/userContext";
 
 const CreateModal = () => {
     const [content,setContent] = useState();
-    // const [image1,setImage1] = useState();
-    // const [image2,setImage2] = useState();
+    const [image1,setImage1] = useState();
+    const [image2,setImage2] = useState();
+    // const {user,setUser} = useContext(UserContext);
     const navigate = useNavigate();
 
-    const createTweet = (data) => {
+    const createTweet = async (data) => {
+        const user_id = localStorage.getItem('user_id')
+        await auth.post('tweets/create/',
+            {
+                "content": content,
+                "image1": image1,
+                "image2": image2,
+                "user": user_id,
+            }
+        );
         navigate('/');
     }
 
@@ -45,7 +56,7 @@ const CreateModal = () => {
                                 <input
                                     type='file'
                                     className="hidden"
-                                    // onChange={(e)=>setimage1(e.target.value)}
+                                    onChange={(e)=>setImage1(e.target.value)}
                                 />
                             </label>
                         </div>
@@ -58,12 +69,20 @@ const CreateModal = () => {
                                 <input
                                     type='file'
                                     className="hidden"
-                                    // onChange={(e)=>setImage2(e.target.value)}
+                                    onChange={(e)=>setImage2(e.target.value)}
                                 />
                             </label>
                         </div>
                     </div>
-                    <button className="btn w-28 hover:bg-blue-500 bg-blue-700 text-white mt-5">投稿する！</button>
+                    <div className="flex justify-between items-center mt-5">
+                        <button className="btn w-28 hover:bg-blue-500 bg-blue-700 text-white">
+                            投稿する！
+                        </button>
+                        <h3>
+                            <span className="link">
+                            </span>
+                        </h3>
+                    </div>
                 </div>
             </form>
             </dialog>

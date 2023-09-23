@@ -1,4 +1,4 @@
-import auth from './auth';
+import {auth,headers} from './auth';
 
 const replyApi = {
     async getReplies(reply_id){
@@ -8,12 +8,19 @@ const replyApi = {
                 tweet: reply_id,
             },
         });
-        debugger
         return res.data;
     },
-    async post(reply){
+    async post(tweetId,user_id,content,image){
+        const formData = new FormData();
+        formData.append('tweet', tweetId);
+        formData.append('user', user_id);
+        formData.append('content', content);
+        formData.append('image', image);
+
         const newReply = await auth
-        .post('replies/');
+        .post('replies/create/',
+            formData,
+        );
         return newReply;
     },
 }
