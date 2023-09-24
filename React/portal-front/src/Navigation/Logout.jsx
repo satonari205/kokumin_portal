@@ -1,29 +1,21 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {auth,headers} from "../api/auth";
+import auth from "../api/auth";
 
 const Logout = () => {
     const navigate = useNavigate();
-    const content = localStorage.getItem('accesstoken');
 
     const logout = async () => {
-        await auth.post('dj-rest-auth/logout/',{
-            content: content,
-        });
-        localStorage.removeItem('accesstoken');
-        localStorage.removeItem('refreshtoken');
-        localStorage.removeItem('user_id');
-        navigate('/login');
+        await auth.post('dj-rest-auth/logout/');
+        navigate('/');
     }
 
     return (
         <>
             <li>
-                <a
-                    href="/login"
-                    onClick={logout}
-                >
+                <button onClick={logout}>
                     ログアウト
-                </a>
+                </button>
             </li>
         </>
     );

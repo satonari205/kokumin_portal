@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Tweet from "./Tweet";
 import CreateModal from "./CreateModal";
 
 const Tweets = () => {
     const [tweets,setTweets] = useState([]);
+    const navigate = useNavigate();
 
     const baseURL = 'http://127.0.0.1:8000/api/';
-    const acc = localStorage.getItem('accesstoken');
 
     useEffect(()=>{
             axios.get(baseURL + 'tweets/',{
@@ -16,7 +17,6 @@ const Tweets = () => {
                 _limit: 30,
             },
             headers:{
-                'Authorization': `JWT ${acc}`,
                 'Content-Type': 'application/json',
             },
             withCredentials: true,
@@ -26,6 +26,8 @@ const Tweets = () => {
             })
             .catch(error => {
                 console.error('Error fetching tweets:', error);
+                alert('ログインが必要です。')
+                navigate('/login');
             })
         },[]);
 

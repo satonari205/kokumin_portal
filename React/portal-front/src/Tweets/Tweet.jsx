@@ -14,10 +14,10 @@ const Tweet = ({ tweet }) => {
             />
         </span>
         <Link
-            to={`/user/${tweet.user.id}`}
+            to={`/users/${tweet.user.id}`}
             className="leading-10 pl-3 w-1/2 hover:underline"
         >
-            <p>{tweet.user.username}</p>
+            <p>{tweet.user.nickname}</p>
         </Link>
         </div>
         {(tweet.content || tweet.image1 || tweet.image2) && (

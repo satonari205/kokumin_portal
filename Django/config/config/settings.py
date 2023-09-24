@@ -9,12 +9,14 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -43,7 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     # 'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
-    'dj_rest_auth'
+    'dj_rest_auth',
 ]
 
 REST_FRAMEWORK = {
@@ -52,18 +54,15 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ]
 }
 
 SIMPLE_JWT = {
-    "TOKEN_OBTAIN_SERIALIZER": "accounts.serializers.MyTokenObtainPairSerializer",
     # のちに10分にする
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=3),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
     # のちに一日にする
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
-    'AUTH_HEADER_TYPES': ('JWT',),
 }
 
 REST_AUTH = {
@@ -98,7 +97,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_HEADERS = [
-    'authorization',
     'content-type',
     'withCredentials',
 ]

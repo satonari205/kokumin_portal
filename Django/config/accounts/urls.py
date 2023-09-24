@@ -1,7 +1,11 @@
 from django.urls import path
 from accounts.views import (
-    UserAPIView,
+    get_current_user,
+    UserRetrieveAPIView,
+    RegisterAPIView,
 )
 urlpatterns = [
-    path('', UserAPIView.as_view()),
+     path('current/', get_current_user, name='current_user'),
+    path('<int:pk>/', UserRetrieveAPIView.as_view()),
+    path('register/',RegisterAPIView.as_view()),
 ]

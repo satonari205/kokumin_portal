@@ -3,7 +3,7 @@ import { Navigation } from "./Navigation/Navigation";
 import Tweets from "./Tweets/Tweets";
 import Replies from "./Replies/Replies";
 import { Magazines } from "./Magazine/Magazines";
-import { User } from "./Users/User";
+import User from "./Users/User";
 import { Login } from "./Users/Login";
 import Register from "./Users/Register";
 import { Notices } from "./Notice/Notices";
@@ -18,7 +18,7 @@ const App = () => {
             <Route path="/" element={<Tweets />} />
             <Route path="/replies/:tweetId" element={<Replies />} />
             <Route path="/magazine" element={<Magazines />} />
-            <Route path="/user/:userId" element={<User />} />
+            <Route path="/users/:userId" element={<User />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/notices" element={<Notices />} />

@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
+
 const Reply = ({reply}) => {
     return(
         <>
             <div className="chat chat-start mb-4">
                 <div className="chat-header">
-                    <span className="hover:link">
-                        reply.username
-                    </span>
+                    <Link to={`/users/${reply.user.id}`} className="hover:link">
+                        {reply.user.nickname}
+                    </Link>
                     <time className="text-xs opacity-50 ml-2">
                         {reply.posted_at}
                     </time>

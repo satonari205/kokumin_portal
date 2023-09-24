@@ -1,29 +1,29 @@
-const ENDPOINT_URL = 'http://127.0.0.1:8000/api/v1/'
+import auth from "../api/auth";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
-    // const history = useHistory();
-    // const [cookie,setCookie] = useCookies();
-    // const [register,handleSubmit,watch,errors] = useForm();
+    const [username,setUsername] = useState("");
+    const [nickname,setNickname] = useState("");
+    const [password,setPassword] = useState("");
+    const navigate = useNavigate();
 
-    // const getJwt = async (data) => {
-    //     console.log(data);
-    //     await axios.post(ENDPOINT_URL + 'auth/jwt/create',
-    //     {
-    //         username: username,
-    //         nickname: nickname,
-    //         password: password,
-    //     })
-    //     .then(function(response){
-    //         console.log(response.data.access)
-    //         setCookie('accesstoken', response.data.access, { path: '/' }, { httpOnly: true });
-    //         setCookie('refreshtoken', response.data.refresh, { path: '/' }, { httpOnly: true });
-    //         history.push('/');
-    //     })
-    // }
+    const register = async () => {
+        await auth.post('users/register/',{
+            "username": username,
+            "nickname": nickname, 
+            "password": password,
+        });
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        register();
+        navigate('/login');
+    }
     
     return(
         <div className="max-w-sm mx-auto">
-            {/* <div className="m-4">
+            <div className="m-4">
                 <div className="text-center">
                 <h1 className="text-2xl font-bold">ユーザー登録</h1>
                 <p className="py-6">
@@ -33,7 +33,7 @@ export const Register = () => {
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                 <form
                     className="card-body"
-                    onSubmit={handleSubmit(getJwt)}
+                    onSubmit={handleSubmit}
                 >
                     <div className="form-control">
                     <label className="label">
@@ -83,7 +83,7 @@ export const Register = () => {
                     </div>
                 </form>
                 </div>
-            </div> */}
+            </div>
         </div>
     );
 };

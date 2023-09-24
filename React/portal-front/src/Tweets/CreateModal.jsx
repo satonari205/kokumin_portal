@@ -1,14 +1,10 @@
-import {auth,headers} from "../api/auth";
+import auth from "../api/auth";
 import { useState } from "react";
-import {useNavigate} from "react-router-dom";
-// import {UserContext} from "../context/userContext";
 
 const CreateModal = () => {
-    const [content,setContent] = useState();
-    const [image1,setImage1] = useState();
-    const [image2,setImage2] = useState();
-    // const {user,setUser} = useContext(UserContext);
-    const navigate = useNavigate();
+    const [content,setContent] = useState("");
+    const [image1,setImage1] = useState("");
+    const [image2,setImage2] = useState("");
 
     const createTweet = async (data) => {
         const user_id = localStorage.getItem('user_id')
@@ -20,14 +16,18 @@ const CreateModal = () => {
                 "user": user_id,
             }
         );
-        navigate('/');
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createTweet();
     }
 
     return(
         <>
             <button
                 className="btn btn-md md:btn-lg hover:bg-blue-500 bg-blue-700 text-white fixed bottom-4 right-4 xl:right-52 text-lg pl-8 pr-8"
-                onClick={()=>window.my_modal_4.showModal()}
+                onClick={()=>document.getElementById('my_modal_4').showModal()}
             >
                 投稿
             </button>
@@ -35,10 +35,14 @@ const CreateModal = () => {
             <form
                 method="dialog"
                 className="modal-box max-w-5xl"
-                onSubmit={createTweet}
+                onSubmit={handleSubmit}
             >
                 <h3 className="font-bold text-lg">投稿してみましょう！</h3>
-                <button className="btn btn-sm btn-circle btn-ghost absolute right-4 top-5">✕</button>
+                <button
+                    className="btn btn-sm btn-circle btn-ghost absolute right-4 top-5"
+                >
+                    ✕
+                </button>
                 <textarea
                     placeholder="1万文字まで書き込めます。"
                     className="textarea text-lg focus:outline-none w-full max-w-5xl h-96 mt-5"

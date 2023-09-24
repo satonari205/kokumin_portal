@@ -1,6 +1,5 @@
-import {auth,headers} from "../api/auth";
+import auth from "../api/auth";
 import {useState} from "react";
-import { useContext } from "react";
 import {useNavigate} from "react-router-dom";
 // import { UserContext } from "../context/userContext";
 
@@ -21,11 +20,7 @@ export const Login = () => {
             },
         ).then(response => {
             console.log(response.data);
-            const { refresh, access, user } = response.data;
-            console.log('Refresh Token:', refresh);
-            console.log('Access Token:', access);
-            localStorage.setItem('accesstoken',access);
-            localStorage.setItem('refreshtoken',refresh);
+            const { user } = response.data;
             localStorage.setItem('user_id',user.pk);
             navigate('/');
         })

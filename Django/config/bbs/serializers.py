@@ -4,7 +4,12 @@ from .models import Tweet, Reply, User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields =('id','username','image')
+        fields =('id','nickname','image')
+
+class ReplyUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields =('id','nickname')
 
 class TweetListSerializer(serializers.ModelSerializer):
     posted_at = serializers.DateTimeField(format="%Y/%m/%d %H:%M", read_only=True)
@@ -23,7 +28,7 @@ class TweetSerializer(serializers.ModelSerializer):
 
 class ReplySerializer(serializers.ModelSerializer):
     posted_at = serializers.DateTimeField(format="%Y/%m/%d %H:%M", read_only=True)
-    user = UserSerializer()
+    user = ReplyUserSerializer()
 
     class Meta:
         model = Reply
