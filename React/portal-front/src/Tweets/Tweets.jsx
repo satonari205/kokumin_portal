@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Tweet from "./Tweet";
-import CreateModal from "./CreateModal";
+import CreateForm from "./CreateForm";
 
 const Tweets = () => {
     const [tweets,setTweets] = useState([]);
@@ -34,12 +34,12 @@ const Tweets = () => {
     return (
         <>
             <div className="divide-y mr-auto ml-auto max-w-5xl p-3">
+                <CreateForm />
                 <div className="p-4 text-center">ひろば</div>
                 {tweets.map((tweet) => (
                     <Tweet key={tweet.id} tweet={tweet} />
                 ))}
             </div>
-            <CreateModal />
         </>
     );
 };
