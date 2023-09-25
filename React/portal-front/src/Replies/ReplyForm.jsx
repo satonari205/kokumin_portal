@@ -1,19 +1,19 @@
 import TextareaAutosize from 'react-textarea-autosize';
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import replyApi from '../api/reply';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from "../context/userContext";
 
 const ReplyForm = ({tweetId}) => {
     const [content,setContent] = useState("");
     const [image,setImage] = useState();
+    const { user } = useContext(UserContext);
     const navigate = useNavigate();
-
-    let user_id = localStorage.getItem('user_id');
 
     const handleSubmit = () => {
         replyApi.post(
             tweetId,
-            user_id,
+            user.id,
             content,
             image,
         );

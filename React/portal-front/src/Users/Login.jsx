@@ -1,14 +1,12 @@
 import auth from "../api/auth";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-// import { UserContext } from "../context/userContext";
 
 const baseURL = 'http://127.0.0.1:8000/api/';
 
 export const Login = () => {
     const [username,setUsername] = useState()
     const [password,setPassword] = useState()
-    // const {user,setUser} = useContext(UserContext);
     const navigate = useNavigate();
 
     const login = async () => {
@@ -20,9 +18,8 @@ export const Login = () => {
             },
         ).then(response => {
             console.log(response.data);
-            const { user } = response.data;
-            localStorage.setItem('user_id',user.pk);
             navigate('/');
+            window.location.reload();
         })
         .catch(error => {
             console.error('Login failed:', error);
