@@ -1,13 +1,15 @@
-import {useEffect,useState} from "react";
-import replyApi from "../api/reply";
-import Reply from "./Reply";
-import MyReply from "../Tweets/MyReply";
-import ReplyForm from "./ReplyForm";
+import {useContext, useEffect,useState} from "react";
 import { useParams,useNavigate } from "react-router-dom";
+import replyApi from "../api/reply";
+import ReplyForm from "./ReplyForm";
+import Reply from "./Reply";
+import MyReply from "./MyReply";
 import TweetDetail from "../Tweets/TweetDetail";
+import { UserContext } from "../context/userContext";
 
 const Replies = () => {
     const [replies,setReplies] = useState([]);
+    const { user } = useContext(UserContext);
     const navigate = useNavigate();
 
     const { tweetId } = useParams();
@@ -26,17 +28,18 @@ const Replies = () => {
 
     return(
         <>
-            <div className="mr-auto ml-auto max-w-5xl p-3">
-                <TweetDetail tweetId={tweetId}/>
-                <div>
-                    <ReplyForm tweetId={tweetId}/>
-                    <div className="shadow-inner min-h- rounded-lg bg-slate-100 p-3">
-                    {replies.map((reply) => (
+            <TweetDetail tweetId={tweetId}/>
+            <div>
+                <ReplyForm tweetId={tweetId}/>
+                <div className="shadow-inner min-h- rounded-lg bg-slate-100 p-3">
+                {replies.map((reply) => (
+                    (user && user.id === reply.user.id) ? (
+                        <MyReply key={reply.id} reply={reply} />
+                    ) : (
                         <Reply key={reply.id} reply={reply} />
-                    ))}
-                    {/* ログインユーザーの保持ができたら,myReplyだけclassName=”chat-end”になるように書き換える */}
-                    <MyReply />
-                    </div>
+                    )
+                ))}
+                {/* ログインユーザーの保持ができたら,myReplyだけclassName=”chat-end”になるように書き換える */}
                 </div>
             </div>
         </>

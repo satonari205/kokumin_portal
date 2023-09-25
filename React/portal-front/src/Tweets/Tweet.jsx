@@ -33,6 +33,7 @@ const Tweet = ({ tweet }) => {
         </Link>
         </div>
       </div>
+      <div className="divider my-0"></div>
     </>
   );
 };
