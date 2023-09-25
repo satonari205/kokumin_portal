@@ -1,6 +1,5 @@
 import {NoticeButton} from "./NoticeButton";
-import CurrentUser from './CurrentUser';
-import { Link } from "react-router-dom";
+import NaviList from "./NaviList";
 
 export const Navigation = () => {
 
@@ -15,16 +14,10 @@ export const Navigation = () => {
                         </svg>
                     </label>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        <li>
-                            <Link to={"/"}>掲示板(仮)</Link>
-                        </li>
-                        <li>
-                            <Link to={"/magagines"}>マガジン(仮)</Link>
-                        </li>
-                        <CurrentUser />
+                        <NaviList />
                     </ul>
                     </div>
-                    <a href="/" className="btn btn-ghost normal-case text-xl">こくみんポータル(仮)</a>
+                    <a href="/" className="btn btn-ghost normal-case text-lg">こくみんポータル(仮)</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 tabs">

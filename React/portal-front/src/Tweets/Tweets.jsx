@@ -33,13 +33,11 @@ const Tweets = () => {
 
     return (
         <>
-            <div className="divide-y mr-auto ml-auto max-w-5xl p-3">
-                <CreateForm />
-                <div className="p-4 text-center">ひろば</div>
-                {tweets.map((tweet) => (
-                    <Tweet key={tweet.id} tweet={tweet} />
-                ))}
-            </div>
+            <div className="pb-3 text-center text-xl bold font-bold">Home(仮)</div>
+            <CreateForm />
+            {tweets.map((tweet) => (
+                <Tweet key={tweet.id} tweet={tweet} />
+            ))}
         </>
     );
 };

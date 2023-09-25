@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import auth from "../api/auth";
+// import Tweet from "../Tweets/Tweet";
+// import Magazines from "../Magazine/Magazines";
 
 const User = () => {
     const [user,setUser] = useState([]);
@@ -21,35 +23,32 @@ const User = () => {
             })
         };
         fetchUser();
+        // {tweetの処理}
     },[])
 
     return(
         <>
-            <div className="mr-auto ml-auto max-w-xl p-4">
+            <div>
+                <img src="/images/default.jpg" className="mr-auto ml-auto w-36 rounded-lg shadow-2xl" alt="プロフィール画像" />
                 <div>
-                    <img src="/images/default.jpg" className="mr-auto ml-auto w-36 rounded-lg shadow-2xl" alt="プロフィール画像" />
-                    <div>
-                        <h1 className="text-3xl font-bold text-center mt-5">{user.nickname}</h1>
-                        <p className="py-6">
-                            {user.bio}
-                        </p>
-                    </div>
+                    <h1 className="text-3xl font-bold text-center mt-5">{user.nickname}</h1>
+                    <p className="py-6">
+                        {user.bio}
+                    </p>
                 </div>
-                <Tabs>
-                    <TabList>
-                        <Tab>ひろば（仮）</Tab>
-                        <Tab>マガジン（仮）</Tab>
-                    </TabList>
-                    <TabPanel>
-                        {/* <UserTweets/> */}
-                        <h1>HOMEです</h1>
-                    </TabPanel>
-                    <TabPanel>
-                        {/* <UserMagaginess/> */}
-                        <h1>Aboutです</h1>
-                    </TabPanel>
-                </Tabs>
             </div>
+            <Tabs className="font">
+                <TabList>
+                    <Tab>ひろば（仮）</Tab>
+                    <Tab>マガジン（仮）</Tab>
+                </TabList>
+                <TabPanel>
+                    {/* <Tweet/> */}
+                </TabPanel>
+                <TabPanel>
+                    {/* <Magazines/> */}
+                </TabPanel>
+            </Tabs>
         </>
     )
 };

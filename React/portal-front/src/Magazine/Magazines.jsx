@@ -1,6 +1,6 @@
 import { Magazine } from "./Magazine";
 
-export const Magazines = () => {
+const Magazines = () => {
     return(
         <>
             <div className="p-4 text-center divider-y">マガジン(仮)</div>
@@ -18,3 +18,5 @@ export const Magazines = () => {
         </>
     );
 };
+
+export default Magazines;
