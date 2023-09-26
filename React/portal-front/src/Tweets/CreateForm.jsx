@@ -6,25 +6,25 @@ import { UserContext } from "../context/userContext";
 
 const CreateForm = () => {
     const [content,setContent] = useState("");
-    const [image1,setImage1] = useState("");
-    const [image2,setImage2] = useState("");
+    const [image1,setImage1] = useState();
+    const [image2,setImage2] = useState();
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
 
     const formData = new FormData();
         formData.append('content', content);
         if(image1){
-            formData.append('image', image1);
+            formData.append('image1', image1);
         }
         if(image2){
-            formData.append('image', image2);
+            formData.append('image2', image2);
         }
 
     const createTweet = async (data) => {
         await auth.post('tweets/create/',
             {
                 "content": content,
-                "image1": image1,
+                "image1": image1.file,
                 "image2": image2,
                 "user": user.id,
             },
@@ -42,7 +42,9 @@ const CreateForm = () => {
         }
         else{
             createTweet();
-            navigate('/');
+            setContent("");
+            setImage1(null);
+            setImage2(null);
         }
     }
 
@@ -50,10 +52,13 @@ const CreateForm = () => {
         const files = e.target.files
         if (files.length === 1){
             setImage1(files[0]);
+            console.log(image1,image2);
         }
         else if(files.length === 2){
+            console.log(image1,image2);
             setImage1(files[0]);
             setImage2(files[1]);
+            console.log(image1,image2);
         }
         else{
             console.log("else");
@@ -76,6 +81,7 @@ const CreateForm = () => {
                     id="tweet"
                     className="textarea h-96 textarea-bordered"
                     placeholder="1万文字まで入力できます"
+                    value={content}
                     onChange={(e)=>{setContent(e.target.value)}}
                 />
                 <div className="flex flex-wrap justify-end items-center my-3">
@@ -88,8 +94,14 @@ const CreateForm = () => {
                                 <input
                                     type='file'
                                     className="hidden"
+                                    value={image1}
                                     onChange={setFile}
-                                />
+                                    />
+                                <span className='text-xs'>
+                                {/* {
+                                    image1 ? image1.files.name : ""
+                                } */}
+                                </span>
                             </label>
                         </div>
                         <div className="items-center justify-center bg-grey-lighter">
@@ -100,8 +112,15 @@ const CreateForm = () => {
                                 <input
                                     type='file'
                                     className="hidden"
+                                    value={image2}
                                     onChange={setFile}
                                 />
+                                <span className='text-xs'>
+                                {/* {
+                                    image2 && image2.files[0]
+                                    ? image2.files[0].name : ""
+                                } */}
+                                </span>
                             </label>
                         </div>
                         <button className="btn btn-sm h-7 items-center hover:bg-blue-500 bg-blue-700 text-white">

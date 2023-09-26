@@ -16,6 +16,9 @@ const Reply = ({reply}) => {
                     {reply.content}
                 </div>
             </div>
+            <div className="max-w-xs max-h-56">
+                {reply.image}
+            </div>
         </>
     );
 }
