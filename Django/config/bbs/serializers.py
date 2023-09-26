@@ -19,7 +19,7 @@ class TweetListSerializer(serializers.ModelSerializer):
         model = Tweet
         fields = ('id', 'user', 'content', 'posted_at', 'image1', 'image2')
 
-class TweetSerializer(serializers.ModelSerializer):
+class TweetCreateSerializer(serializers.ModelSerializer):
     posted_at = serializers.DateTimeField(format="%Y/%m/%d %H:%M", read_only=True)
 
     class Meta:

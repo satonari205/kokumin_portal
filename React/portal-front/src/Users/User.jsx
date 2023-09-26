@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import auth from "../api/auth";
-// import Tweet from "../Tweets/Tweet";
+import Tweet from "../Tweets/Tweet";
 // import Magazines from "../Magazine/Magazines";
 
 const User = () => {
     const [user,setUser] = useState([]);
+    const [tweets,setTweets] = useState([]);
     const { userId } = useParams();
 
     useEffect( ()=>{
@@ -24,6 +25,22 @@ const User = () => {
         };
         fetchUser();
         // {tweetの処理}
+        async function fetchUserTweet(){
+            await auth.get('tweets/',{
+                params:{
+                    _sort: '-posted_at',
+                    user: userId,
+                },
+            })
+            .then(res => {
+                console.log(res.data);
+                setTweets(res.data);
+            })
+            .catch(error =>{
+                console.log(error);
+            })
+        }
+        fetchUserTweet();
     },[])
 
     return(
@@ -43,7 +60,9 @@ const User = () => {
                     <Tab>マガジン（仮）</Tab>
                 </TabList>
                 <TabPanel>
-                    {/* <Tweet/> */}
+                    {tweets.map(tweet => {
+                        <Tweet key={tweet.id} tweet={tweet}/>
+                    })}
                 </TabPanel>
                 <TabPanel>
                     {/* <Magazines/> */}

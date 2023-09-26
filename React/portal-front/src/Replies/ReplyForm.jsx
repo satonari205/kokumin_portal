@@ -1,5 +1,5 @@
-import TextareaAutosize from 'react-textarea-autosize';
 import { useState,useContext } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
 import replyApi from '../api/reply';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../context/userContext";
@@ -11,13 +11,28 @@ const ReplyForm = ({tweetId}) => {
     const navigate = useNavigate();
 
     const handleSubmit = () => {
-        replyApi.post(
-            tweetId,
-            user.id,
-            content,
-            image,
-        );
-        navigate(`/replies/${tweetId}`);
+        if(!user){
+            alert('ログインが必要です。');
+            navigate('/login')
+        }
+        else{
+            replyApi.post(tweetId,user.id,content,image,
+                {headers: {
+                    'Content-Type': 'multipart/form-data',
+                }},
+            );
+            navigate(`/replies/${tweetId}`);
+        }
+    }
+
+    const setFile = (e) => {
+        const files = e.target.files
+        if (files){
+            setImage(files[0]);
+        }
+        else{
+            console.log("else");
+        }
     }
 
     console.log(image);
@@ -54,7 +69,7 @@ const ReplyForm = ({tweetId}) => {
                             <input
                                 type='file'
                                 className="hidden"
-                                onChange={(e)=>setImage(e.target.files)}
+                                onChange={setFile}
                             />
                         </label>
                     </div>
