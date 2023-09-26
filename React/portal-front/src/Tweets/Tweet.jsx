@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Tweet = ({ tweet }) => {
+  console.log(tweet);
   return (
     <>
       <div className="p-3">
@@ -21,11 +22,29 @@ const Tweet = ({ tweet }) => {
         </Link>
         </div>
         {(tweet.content || tweet.image1 || tweet.image2) && (
-        <a className="pt-4 pb-4">
-            {tweet.content}
-            {tweet.image1 && <img src={tweet.image1} alt="tweet.image1" />}
-            {tweet.image2 && <img src={tweet.image2} alt="tweet.image2" />}
-        </a>
+        <div className="pt-4 pb-4">
+          {tweet.content}
+          <div className="flex flex-wrap">
+            {tweet.image1 &&
+              <a href={tweet.image1} target="_blank">
+                <img
+                  src={tweet.image1}
+                  alt="tweet.image1"
+                  className="max-w-xs"
+                  />
+              </a>
+            }
+            {tweet.image2 &&
+              <a href={tweet.image2} target="_blank">
+                <img
+                  src={tweet.image2}
+                  alt="tweet.image2"
+                  className="max-w-xs"
+                  />
+              </a>
+            }
+          </div>
+        </div>
         )}
         <div className="flex justify-end pt-3">
         <Link to={`/replies/${tweet.id}`} className="btn btn-ghost btn-sm mt-3">

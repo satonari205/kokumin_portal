@@ -39,7 +39,6 @@ const Replies = () => {
                         <Reply key={reply.id} reply={reply} />
                     )
                 ))}
-                {/* ログインユーザーの保持ができたら,myReplyだけclassName=”chat-end”になるように書き換える */}
                 </div>
             </div>
         </>

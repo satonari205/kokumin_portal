@@ -1,6 +1,7 @@
 import TextareaAutosize from 'react-textarea-autosize';
 import auth from "../api/auth";
 import { useContext, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../context/userContext";
 
 const CreateForm = () => {
@@ -8,15 +9,15 @@ const CreateForm = () => {
     const [image1,setImage1] = useState("");
     const [image2,setImage2] = useState("");
     const { user } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const formData = new FormData();
-        // formData.append('user', user.id);
         formData.append('content', content);
         if(image1){
             formData.append('image', image1);
         }
         if(image2){
-            formData.append('image', image1);
+            formData.append('image', image2);
         }
 
     const createTweet = async (data) => {
@@ -26,13 +27,37 @@ const CreateForm = () => {
                 "image1": image1,
                 "image2": image2,
                 "user": user.id,
-            }
+            },
+            {headers: {
+                'Content-Type': 'multipart/form-data',
+            }},
         );
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        createTweet();
+        if(!user){
+            alert('ログインが必要です。');
+            navigate('/login');
+        }
+        else{
+            createTweet();
+            navigate('/');
+        }
+    }
+
+    const setFile = (e) => {
+        const files = e.target.files
+        if (files.length === 1){
+            setImage1(files[0]);
+        }
+        else if(files.length === 2){
+            setImage1(files[0]);
+            setImage2(files[1]);
+        }
+        else{
+            console.log("else");
+        }
     }
 
     return(
@@ -63,7 +88,7 @@ const CreateForm = () => {
                                 <input
                                     type='file'
                                     className="hidden"
-                                    onChange={(e)=>setImage1(e.target.value)}
+                                    onChange={setFile}
                                 />
                             </label>
                         </div>
@@ -75,7 +100,7 @@ const CreateForm = () => {
                                 <input
                                     type='file'
                                     className="hidden"
-                                    onChange={(e)=>setImage2(e.target.value)}
+                                    onChange={setFile}
                                 />
                             </label>
                         </div>

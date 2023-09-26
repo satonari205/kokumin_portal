@@ -1,7 +1,7 @@
 from .models import Tweet,Reply
 from .serializers import (
     TweetListSerializer,
-    TweetSerializer,
+    TweetCreateSerializer,
     ReplySerializer,
     ReplyCreateSerializer,
 )
@@ -23,11 +23,13 @@ class TweetRetrieveAPIView(generics.RetrieveAPIView):
     def get(self,request,pk):
         tweet = get_object_or_404(Tweet, id=pk)
         serializer = self.serializer_class(tweet)
+        serializer.data['image1'] = f"http://127.0.0.1:8000{serializer.data['image1']}"
+        serializer.data['image2'] = f"http://127.0.0.1:8000{serializer.data['image2']}"
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class TweetCreateAPIView(generics.CreateAPIView):
     permission_class = [permissions.IsAuthenticated]
-    serializer_class = TweetSerializer
+    serializer_class = TweetCreateSerializer
     queryset = Tweet.objects.all()
 
 class RepliesListAPIView(generics.ListAPIView):

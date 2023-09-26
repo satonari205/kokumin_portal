@@ -60,7 +60,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     # のちに10分にする
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=3),
     # のちに一日にする
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
 }
