@@ -28,7 +28,7 @@ const User = () => {
         async function fetchUserTweet(){
             await auth.get('tweets/',{
                 params:{
-                    _sort: '-posted_at',
+                    _sort: 'posted_at',
                     user: userId,
                 },
             })

@@ -1,5 +1,5 @@
 import { useEffect,useState} from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import auth from "../api/auth";
 
 const TweetDetail = ({tweetId}) => {
@@ -11,22 +11,13 @@ const TweetDetail = ({tweetId}) => {
             id: tweetId,
         })
         .then(res => {
-			const modifiedData = {
-				...res.data,
-				image1: `http://127.0.0.1:8000${res.data.image1}`,
-				image2: `http://127.0.0.1:8000${res.data.image2}`,
-			};
-            console.log(modifiedData);
 			setUser(res.data.user);
-			setTweet(modifiedData);
+			setTweet(res.data);
         })
         .catch(error => {
             console.error('Error fetching tweets:', error);
         })
     },[tweetId]);
-
-	console.log(tweet.image1);
-	console.log(tweet.image2);
 
     return(
         <>
@@ -47,7 +38,11 @@ const TweetDetail = ({tweetId}) => {
                 )}
                 <div className="flex flex-wrap">
 					{tweet.image1 &&
-						<a href={tweet.image1} target="_blank">
+						<a
+                            href={tweet.image1}
+                            target="_blank"
+                            className="pt-3"
+                        >
 							<img
 							src={tweet.image1}
 							alt="tweet.image1"
@@ -56,7 +51,11 @@ const TweetDetail = ({tweetId}) => {
 						</a>
 					}
 					{tweet.image2 &&
-						<a href={tweet.image2} target="_blank">
+						<a
+                            href={tweet.image2}
+                            target="_blank"
+                            className="pt-3"
+                        >
 							<img
 								src={tweet.image2}
 								alt="tweet.image2"
