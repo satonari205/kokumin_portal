@@ -13,13 +13,11 @@ const User = () => {
 
     useEffect( ()=>{
         async function fetchUser(){
-            await auth.get(`users/${userId}/`)
+            await auth.get(`users/${userId}`)
             .then(res=>{
-                console.log(res);
                 setUser(res.data);
             })
             .catch(error=>{
-                console.log(error);
                 alert(error);
             })
         };
@@ -28,7 +26,6 @@ const User = () => {
         async function fetchUserTweet(){
             await auth.get('tweets/',{
                 params:{
-                    _sort: 'posted_at',
                     user: userId,
                 },
             })
@@ -60,9 +57,9 @@ const User = () => {
                     <Tab>マガジン（仮）</Tab>
                 </TabList>
                 <TabPanel>
-                    {tweets.map(tweet => {
+                    {tweets.map(tweet => (
                         <Tweet key={tweet.id} tweet={tweet}/>
-                    })}
+                    ))}
                 </TabPanel>
                 <TabPanel>
                     {/* <Magazines/> */}

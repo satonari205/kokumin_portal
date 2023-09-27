@@ -39,16 +39,22 @@ const Tweet = ({ tweet }) => {
                   src={tweet.image2}
                   alt="tweet.image2"
                   className="max-w-xs"
-                  />
+                />
               </a>
             }
           </div>
         </div>
         )}
-        <div className="flex justify-end pt-3">
-        <Link to={`/replies/${tweet.id}`} className="btn btn-ghost btn-sm mt-3">
-            コメントする
-        </Link>
+        <div className="flex justify-between">
+          <p className="text-center leading-8">
+            {tweet.posted_at}
+          </p>
+          <Link
+            to={`/replies/${tweet.id}`}
+            className="btn btn-ghost btn-sm"
+          >
+              コメントする
+          </Link>
         </div>
       </div>
       <div className="divider my-0"></div>
