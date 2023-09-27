@@ -14,10 +14,15 @@ const Reply = ({reply}) => {
                 </div>
                 <div className="chat-bubble">
                     {reply.content}
+                    <div className="max-w-xs max-h-56">
+                        <a href={reply.image} target="_blank">
+                            <img
+                                src={reply.image}
+                                alt="pic"
+                            />
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div className="max-w-xs max-h-56">
-                {reply.image}
             </div>
         </>
     );

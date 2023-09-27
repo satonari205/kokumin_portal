@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import User
+from django.core.exceptions import ValidationError
 
 class Tweet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="tweets")
@@ -9,8 +10,8 @@ class Tweet(models.Model):
     image2 = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def clean(self):
-        if not self.content and not [self.image1, self.image2]:
-            raise models.ValidationError("Content and image cannot both be empty.")
+        if not self.content and not self.image1 and not self.image2:
+            raise ValidationError("コンテンツまたは画像が必要です。")
 
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -28,7 +29,7 @@ class Reply(models.Model):
 
     def clean(self):
         if not self.content and not self.image:
-            raise models.ValidationError("Content and image cannot both be empty.")
+            raise ValidationError("Content and image cannot both be empty.")
 
     def save(self, *args, **kwargs):
         self.full_clean()

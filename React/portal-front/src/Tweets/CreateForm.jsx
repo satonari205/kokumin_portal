@@ -20,18 +20,24 @@ const CreateForm = () => {
             formData.append('image2', image2);
         }
 
-    const createTweet = async (data) => {
+    const createTweet = async () => {
         await auth.post('tweets/create/',
             {
                 "content": content,
-                "image1": image1.file,
+                "image1": image1,
                 "image2": image2,
                 "user": user.id,
             },
             {headers: {
                 'Content-Type': 'multipart/form-data',
             }},
-        );
+        )
+        .then({
+            
+        })
+        .catch(err =>{
+
+        });
     }
 
     const handleSubmit = (e) => {
@@ -39,6 +45,9 @@ const CreateForm = () => {
         if(!user){
             alert('ログインが必要です。');
             navigate('/login');
+        }
+        else if (!content && !image1 && !image2) {
+            alert('コンテンツまたは画像を入力してください。');
         }
         else{
             createTweet();
@@ -48,17 +57,29 @@ const CreateForm = () => {
         }
     }
 
+    const setText = (e) => {
+        const text = e.target.value;
+        if(!user){
+            alert('ログインが必要です。');
+            navigate('/login');
+        }
+        else{
+            setContent(text);
+        }
+    }
+
     const setFile = (e) => {
-        const files = e.target.files
+        const files = e.target.files;
+        if(!user){
+            alert('ログインが必要です。');
+            navigate('/login');
+        }
         if (files.length === 1){
             setImage1(files[0]);
-            console.log(image1,image2);
         }
         else if(files.length === 2){
-            console.log(image1,image2);
             setImage1(files[0]);
             setImage2(files[1]);
-            console.log(image1,image2);
         }
         else{
             console.log("else");
@@ -82,51 +103,24 @@ const CreateForm = () => {
                     className="textarea h-96 textarea-bordered"
                     placeholder="1万文字まで入力できます"
                     value={content}
-                    onChange={(e)=>{setContent(e.target.value)}}
+                    onChange={setText}
                 />
-                <div className="flex flex-wrap justify-end items-center my-3">
-                    <div className="flex items-center gap-4">
-                        <div className="items-center justify-center bg-grey-lighter">
-                            <label className="w-10 flex items-center px-2 py-2 rounded-lg tracking-wide uppercase cursor-pointer">
-                                <svg className="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                                </svg>
-                                <input
-                                    type='file'
-                                    className="hidden"
-                                    value={image1}
-                                    onChange={setFile}
-                                    />
-                                <span className='text-xs'>
-                                {/* {
-                                    image1 ? image1.files.name : ""
-                                } */}
-                                </span>
-                            </label>
-                        </div>
-                        <div className="items-center justify-center bg-grey-lighter">
-                            <label className="w-10 flex items-center px-2 py-2 rounded-lg tracking-wide uppercase cursor-pointer">
-                                <svg className="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                                </svg>
-                                <input
-                                    type='file'
-                                    className="hidden"
-                                    value={image2}
-                                    onChange={setFile}
-                                />
-                                <span className='text-xs'>
-                                {/* {
-                                    image2 && image2.files[0]
-                                    ? image2.files[0].name : ""
-                                } */}
-                                </span>
-                            </label>
-                        </div>
-                        <button className="btn btn-sm h-7 items-center hover:bg-blue-500 bg-blue-700 text-white">
-                            <span>
-                                投稿する！
-                            </span>
+                <div className="flex justify-between items-end my-3">
+                    <div className='flex flex-col gap-2'>
+                        <input
+                            type="file"
+                            className="file-input file-input-bordered file-input-xs max-w-xs"
+                            onChange={setFile}
+                        />
+                        <input
+                            type="file"
+                            className="file-input file-input-bordered file-input-xs max-w-xs"
+                            onChange={setFile}
+                        />
+                    </div>
+                    <div className='items-end'>
+                        <button className="btn btn-sm h-7 hover:bg-blue-500 bg-blue-700 text-white">
+                            投稿する！
                         </button>
                     </div>
                 </div>

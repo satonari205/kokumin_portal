@@ -18,7 +18,6 @@ const CurrentUser = () => {
 				withCredentials: true,
             })
             .then(res => {
-                console.log(res.data);
                 setUser(res.data);
             })
             .catch(error => {

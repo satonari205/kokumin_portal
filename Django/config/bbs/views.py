@@ -13,8 +13,15 @@ from django.shortcuts import get_object_or_404
 
 class TweetListAPIView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
-    queryset = Tweet.objects.all()
     serializer_class = TweetListSerializer
+
+    def get_queryset(self):
+        user = self.request.query_params.get('user')
+        queryset = Tweet.objects.all()
+        if user is not None:
+            queryset = queryset.filter(user=user).order_by('posted_at')
+        return queryset.order_by('posted_at').reverse()[:30]
+
 
 class TweetRetrieveAPIView(generics.RetrieveAPIView):
     permission_classes = [permissions.AllowAny]
