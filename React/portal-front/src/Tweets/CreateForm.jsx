@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../context/userContext";
 
-const CreateForm = () => {
+const CreateForm = ({onNewTweet}) => {
     const [content,setContent] = useState("");
     const [image1,setImage1] = useState();
     const [image2,setImage2] = useState();
@@ -117,7 +117,9 @@ const CreateForm = () => {
                         />
                     </div>
                     <div className='items-end'>
-                        <button className="btn btn-sm h-7 hover:bg-blue-500 bg-blue-700 text-white">
+                        <button
+                            className="btn btn-sm h-7 hover:bg-blue-500 bg-blue-700 text-white"
+                            onClick={onNewTweet}>
                             投稿する！
                         </button>
                     </div>
