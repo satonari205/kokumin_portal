@@ -10,9 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+import environ
 from pathlib import Path
 from datetime import timedelta
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    # 'rest_framework_simplejwt.token_blacklist',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'dj_rest_auth',
 ]
@@ -136,10 +136,20 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR,'.env'))
+
 DATABASES = {
+    # 'default': env.db(),
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'kokumin_portal',
+        # 'USER': env.str('DB_USER'),
+        # 'PASSWORD': env.str('DB_PASSWORD'),
+        'USER': 'kokupo',
+        'PASSWORD': 'kokupo8290',
+        'HOST':'localhost',
+        'POST':'5432',
     }
 }
 
