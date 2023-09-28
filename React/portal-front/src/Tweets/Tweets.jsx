@@ -10,9 +10,6 @@ const Tweets = () => {
 
     const baseURL = 'http://127.0.0.1:8000/api/';
 
-    // axios.defaults.headers['Content-Type'] = 'application/json';
-    // axios.defaults.withCredentials = true;
-
     const fetchTweets = async () => {
         await axios.get(baseURL + 'tweets/',
         {
@@ -48,20 +45,22 @@ const Tweets = () => {
         });
     };
 
-    const onNewTweet = () => {
-        newTweet();
-    }
+    // const onNewTweet = () => {
+    //     newTweet();
+    // }
 
     useEffect(()=>{
             fetchTweets();
     },[]);
 
-    console.log(tweets);
+    // console.log(tweets);
 
     return (
         <>
             <div className="pb-3 text-center text-xl bold font-bold">Home(仮)</div>
-            <CreateForm onNewTweet={onNewTweet}/>
+            <CreateForm
+                // onNewTweet={onNewTweet}
+            />
             {/* 投稿した直後にTweetが表示された方が気持ちいいよな。 */}
             {tweets.map((tweet) => (
                 <Tweet key={tweet.id} tweet={tweet} />

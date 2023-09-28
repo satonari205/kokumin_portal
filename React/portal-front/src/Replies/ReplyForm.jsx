@@ -34,13 +34,14 @@ const ReplyForm = ({tweetId}) => {
         e.preventDefault();
         if(!user){
             alert('ログインが必要です。');
-            navigate('/login')
+            navigate('/login');
         }
         else if(!content && !image){
             alert('コンテンツまたは画像を入力してください。');
         }
         else{
             CreateReply();
+            alert('投稿されました');
             setContent("");
             setImage(null);
         }
