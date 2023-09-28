@@ -13,6 +13,8 @@ import os
 import environ
 from pathlib import Path
 from datetime import timedelta
+
+DEFAULT_CHARSET = "utf-8"
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -140,17 +142,17 @@ env = environ.Env()
 env.read_env(os.path.join(BASE_DIR,'.env'))
 
 DATABASES = {
-    # 'default': env.db(),
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'kokumin_portal',
-        # 'USER': env.str('DB_USER'),
-        # 'PASSWORD': env.str('DB_PASSWORD'),
-        'USER': 'kokupo',
-        'PASSWORD': 'kokupo8290',
-        'HOST':'localhost',
-        'POST':'5432',
-    }
+    'default': env.db(),
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'kokupo_db',
+    #     # 'USER': 'kokupo',
+    #     # 'PASSWORD': 'kokupo8290',
+    #     'USER': env.str('DB_USER'),
+    #     'PASSWORD': env.str('DB_PASSWORD'),
+    #     'HOST':'localhost',
+    #     'POST':'5432',
+    # }
 }
 
 

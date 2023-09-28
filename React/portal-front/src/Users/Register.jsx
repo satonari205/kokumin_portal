@@ -64,7 +64,7 @@ export const Register = () => {
                         <span className="label-text">Password</span>
                     </label>
                     <input
-                        type="text"
+                        type="password"
                         placeholder="8~100文字で入力して下さい"
                         className="input input-bordered"
                         value={password}
