@@ -32,12 +32,10 @@ const CreateForm = () => {
                 'Content-Type': 'multipart/form-data',
             }},
         )
-        .then({
-            
-        })
-        .catch(err =>{
-
-        });
+        // .then({
+        // })
+        // .catch(err =>{
+        // });
     }
 
     const handleSubmit = (e) => {
