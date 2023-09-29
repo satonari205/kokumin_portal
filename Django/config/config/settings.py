@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'rest_framework_simplejwt.token_blacklist',
+    # 'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'dj_rest_auth',
 ]
@@ -61,10 +61,9 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    # のちに10分にする
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=3),
-    # のちに一日にする
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False
 }
 
 REST_AUTH = {
