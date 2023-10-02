@@ -5,6 +5,7 @@ from .serializers import (
     UserSerializer,
     RegisterSerializer,
 )
+from rest_framework.views import APIView
 from rest_framework.generics import (
     RetrieveAPIView,
     CreateAPIView,
@@ -13,12 +14,46 @@ from rest_framework import permissions,status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.status import HTTP_200_OK
+from django.middleware.csrf import get_token
+# from django.http import JsonResponse
+# from dj_rest_auth.jwt_auth import get_refresh_view
+# from dj_rest_auth.views import LoginView as OrgLoginView
+
+# def CsrfView(request):
+#     return JsonResponse({'token': get_token(request)})
+
+# def PingView(request):
+#     return JsonResponse({'result': True})
 
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def get_current_user(request):
     serializer = CurrentUserSerializer(request.user)
     return Response(serializer.data, status=HTTP_200_OK)
+
+class CSRFView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, format=None):
+        return Response({"csrfToken": get_token(request)})
+
+# class LoginView(OrgLoginView):
+#     authentication_classes = []
+
+# OrgRefreshViewCls = get_refresh_view()
+
+# class RefreshView(OrgRefreshViewCls): 
+#     authentication_classes = []
+
+#     def finalize_response(self, request, response, *args, **kwargs):
+#         res = super().finalize_response(request, response, *args, **kwargs)
+#         if res.status_code != 200:
+#             return res
+
+#         for key in ["access", "refresh"]:
+#             if key in res.data:
+#                 del res.data[key]
+#         return res
 
 class UserRetrieveAPIView(RetrieveAPIView):
     permission_classes = [permissions.AllowAny]
@@ -35,16 +70,13 @@ class RegisterAPIView(CreateAPIView):
     serializer_class = RegisterSerializer
 
     def create(self, request, *args, **kwargs):
-        # シリアライザの実行 (ユーザー情報のバリデーション)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         
-        # パスワードのハッシュ化
         validated_data = serializer.validated_data
         password = validated_data.get('password')
         hashed_password = make_password(password)
 
-        # ユーザー作成
         user = User.objects.create(
             username=validated_data.get('username'),
             nickname=validated_data.get('nickname'),

@@ -1,0 +1,31 @@
+{% load django_vite %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+      {% if debug %}
+          <script type="module">
+            import RefreshRuntime from "http://localhost:3000/@react-refresh"
+            RefreshRuntime.injectIntoGlobalHook(window)
+            window.$RefreshReg$ = () => {}
+            window.$RefreshSig$ = () => (type) => type
+            window.__vite_plugin_react_preamble_installed__ = true
+          </script><script type="module" src="http://localhost:3000/@vite/client"></script>
+          <script type="module" src="http://localhost:3000/assets/js/website.js"></script>
+          {% vite_hmr_client %}
+          {% vite_asset 'main.jsx' %}
+
+      {% else %}
+          {% vite_asset 'main.jsx' %}
+      {% endif %}
+
+    <title>Django + Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
