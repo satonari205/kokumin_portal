@@ -8,24 +8,25 @@ const CurrentUser = () => {
   const { user,setUser } = useContext(UserContext);
 
   const baseURL = 'http://127.0.0.1:8000/api/';
-  axios.defaults.xsrfCookieName = 'csrftoken';
-  axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+  const acc = localStorage.getItem('accesstoken');
+  if(acc){
+      axios.defaults.headers.common['Authorization'] = 'JWT ' + acc;
+  }
 
     useEffect(()=>{
         async function currentUser () {
-            await axios.get(baseURL + 'users/current/',{
-				headers:{
-					'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-				},
-				withCredentials: true,
-            })
-            .then(res => {
-                setUser(res.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+          await axios.get(baseURL + 'users/current/',{
+            headers:{
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          })
+          .then(res => {
+              setUser(res.data);
+          })
+          .catch(error => {
+              console.log(error);
+          });
         }
         currentUser();
     },[])

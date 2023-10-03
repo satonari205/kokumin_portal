@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Reply = ({reply}) => {
+    console.log(reply);
     return(
         <>
             <div className="chat chat-start mb-4">

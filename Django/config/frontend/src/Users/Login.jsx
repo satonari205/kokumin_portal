@@ -1,27 +1,24 @@
 import auth from "../api/auth";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-// import {useCookies} from "react-cookie";
-
-const baseURL = 'http://127.0.0.1:8000/api/';
 
 const Login = () => {
     const [username,setUsername] = useState();
     const [password,setPassword] = useState();
-    // const [cookies,setCookies] = useCookies(['csrfToken']);
     const navigate = useNavigate();
 
     const login = async () => {
-        fetchCsrfToken();
-        auth.defaults.xsrfCookieName = 'csrftoken';
         const response = await auth
-        .post(baseURL + 'dj-rest-auth/login/',
+        .post('users/jwt/create/',
             {
                 username: username,
                 password: password,
             },
         ).then(response => {
+            const {refresh,access} = response.data;
             console.log(response.data);
+            localStorage.setItem('refreshtoken',refresh);
+            localStorage.setItem('accesstoken',access);
             navigate('/');
             window.location.reload();
         })
@@ -29,16 +26,6 @@ const Login = () => {
             console.error('Login failed:', error);
             alert(error);
         })
-    };
-
-    const fetchCsrfToken = async () => {
-    const response = await auth.get('users/csrf/')
-        .then(res => {
-            console.log(res);
-        })
-        .catch(e =>{
-            console.error(e);
-        });
     };
 
     const handleSubmit = (e) => {

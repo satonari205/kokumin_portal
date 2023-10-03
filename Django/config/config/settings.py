@@ -39,14 +39,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    # 'rest_framework_simplejwt.token_blacklist',
+    'rest_framework_simplejwt.token_blacklist',
+    'djoser',
     'corsheaders',
-    'dj_rest_auth',
-    # 'django.contrib.sites',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'dj_rest_auth.registration',
 ]
 
 SITE_ID = 1
@@ -57,30 +52,20 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-    ]
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
 
 SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=3),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False
 }
 
-REST_AUTH = {
-    'USE_JWT': True,
-    'JWT_AUTH_COOKIE': 'accesstoken',
-    'JWT_AUTH_REFRESH_COOKIE': 'refreshtoken',
-    'JWT_AUTH_COOKIE_USE_CSRF': True,
-    'JWT_AUTH_HTTPONLY': True,
-    'JWT_AUTH_SECURE': True,
-    'JWT_AUTH_SAMESITE': None,
-}
-
 AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -89,17 +74,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    "allauth.account.middleware.AccountMiddleware",
 ]
 
-# CORS_ORIGIN_ALLOW_ALL = False
-
 CORS_ALLOW_CREDENTIALS = True
-
-# CORS_ALLOWED_ORIGINS = (
-#     'http://localhost:3000',
-#     'http://127.0.0.1:3000',
-# )
 
 CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
 
@@ -116,15 +93,6 @@ CORS_ALLOW_METHODS = (
     "POST",
     "PUT",
 )
-
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://localhost:3000',
-#     'http://127.0.0.1:3000',
-# ]
-
-CSRF_COOKIE_HTTPONLY = True
-CSRF_COOKIE_SAMESITE = None
-CSRF_COOKIE_SECURE = True
 
 ROOT_URLCONF = 'config.urls'
 

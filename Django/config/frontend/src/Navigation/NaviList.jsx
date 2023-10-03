@@ -8,7 +8,7 @@ const NaviList = () => {
                 <Link to={"/"}>ホーム(仮)</Link>
             </li>
             <li>
-                <Link to={"/magagines"}>マガジン(仮)</Link>
+                <Link to={"/magazines"}>マガジン(仮)</Link>
             </li>
             <CurrentUser />
         </>

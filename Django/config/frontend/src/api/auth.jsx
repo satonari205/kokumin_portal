@@ -2,8 +2,10 @@ import axios from "axios";
 
 const baseURL = 'http://127.0.0.1:8000/api/';
 
-axios.defaults.xsrfCookieName = 'csrftoken';
-// axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+const acc = localStorage.getItem('accesstoken');
+if(acc){
+    axios.defaults.headers.common['Authorization'] = 'JWT ' + acc;
+}
 
 const auth = axios.create({
     baseURL: baseURL,

@@ -9,7 +9,7 @@ export const Register = () => {
     const navigate = useNavigate();
 
     const register = async () => {
-        await auth.post('dj-rest-auth/register/',{
+        await auth.post('users/users/',{
             "username": username,
             "nickname": nickname,
             "password": password,

@@ -19,6 +19,8 @@ const TweetDetail = ({tweetId}) => {
         })
     },[tweetId]);
 
+    console.log(tweet);
+
     return(
         <>
             <div className="avatar flex justify-start w-1/2 m-2">

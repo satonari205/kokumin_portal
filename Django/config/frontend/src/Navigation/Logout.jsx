@@ -7,8 +7,9 @@ const Logout = () => {
     const navigate = useNavigate();
     const {user,setUser} = useContext(UserContext);
 
-    const logout = async () => {
-        await auth.post('dj-rest-auth/logout/');
+    const logout = () => {
+        localStorage.removeItem('refreshtoken');
+        localStorage.removeItem('accesstoken');
         navigate('/');
         setUser(null);
     }
