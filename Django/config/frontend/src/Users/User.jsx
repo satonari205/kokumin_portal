@@ -13,8 +13,9 @@ const User = () => {
 
     useEffect( ()=>{
         async function fetchUser(){
-            await auth.get(`users/${userId}`)
+            await auth.get(`users/${userId}/`)
             .then(res=>{
+                console.log(res);
                 setUser(res.data);
             })
             .catch(error=>{

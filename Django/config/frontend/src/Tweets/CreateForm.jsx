@@ -32,10 +32,6 @@ const CreateForm = () => {
                 'Content-Type': 'multipart/form-data',
             }},
         )
-        // .then({
-        // })
-        // .catch(err =>{
-        // });
     }
 
     const handleSubmit = (e) => {
@@ -122,7 +118,7 @@ const CreateForm = () => {
                             className="btn btn-sm h-7 hover:bg-blue-500 bg-blue-700 text-white"
                             // onClick={onNewTweet}
                         >
-                            投稿する！
+                            投稿
                         </button>
                     </div>
                 </div>

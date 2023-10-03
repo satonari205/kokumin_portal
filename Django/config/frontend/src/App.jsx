@@ -21,7 +21,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Tweets />} />
             <Route path="/replies/:tweetId" element={<Replies />} />
-            <Route path="/magazine" element={<Magazines />} />
+            <Route path="/magazines" element={<Magazines />} />
             <Route path="/users/:userId" element={<User />} />
             {user ? null : (
               <>
@@ -30,7 +30,7 @@ const App = () => {
               </>
             )}
             <Route path="/notices" element={<Notices />} />
-            <Route path="*" element={<NoMatch />} />
+            <Route path="/nomatch" element={<NoMatch />} />
           </Routes>
         </div>
       </Router>

@@ -9,22 +9,31 @@ const Tweets = () => {
     const { user} = useContext(UserContext);
 
     const baseURL = 'http://127.0.0.1:8000/api/';
+<<<<<<< HEAD
     // axios.defaults.xsrfCookieName = 'csrftoken';
     // axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
+=======
+>>>>>>> bc07bfb8c55f2533d1cc2c78dc25cda1c52ec0a8
 
     const fetchTweets = async () => {
         await axios.get(baseURL + 'tweets/',
         {
             headers:{
             'Content-Type': 'application/json',
+<<<<<<< HEAD
             // 'xsrfCookieName': 'XSRF-TOKEN',
             // 'xsrfHeaderName': 'X-XSRF-TOKEN',
+=======
+>>>>>>> bc07bfb8c55f2533d1cc2c78dc25cda1c52ec0a8
         },
         withCredentials: true,
         }
         )
         .then(response => {
+<<<<<<< HEAD
             // fetchCsrfToken();
+=======
+>>>>>>> bc07bfb8c55f2533d1cc2c78dc25cda1c52ec0a8
             setTweets(response.data);
             console.log(response);
         })
@@ -51,6 +60,7 @@ const Tweets = () => {
         });
     };
 
+<<<<<<< HEAD
     // const fetchCsrfToken = async () => {
     //     const response = await axios.get(baseURL + 'api/csrf/',)
     //         .then(res => {
@@ -62,6 +72,8 @@ const Tweets = () => {
     //         });
     //     };
 
+=======
+>>>>>>> bc07bfb8c55f2533d1cc2c78dc25cda1c52ec0a8
     // const onNewTweet = () => {
     //     newTweet();
     // }

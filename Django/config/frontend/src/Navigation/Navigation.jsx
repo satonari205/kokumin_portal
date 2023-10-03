@@ -17,13 +17,16 @@ export const Navigation = () => {
                         <NaviList />
                     </ul>
                     </div>
-                    <a href="/" className="btn btn-ghost normal-case text-lg">こくみんポータル(仮)</a>
+                    <a
+                        href="/"
+                        className="btn btn-ghost normal-case text-lg"
+                    >
+                        こくみんポータル(β版)
+                    </a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 tabs">
-                        <li className="tab"><a>掲示板(仮)</a></li>
-                        <li className="tab tab-active"><a>グループチャット(未実装)</a></li>
-                        <li className="tab"><a href="/magazine">マガジン(仮)</a></li>
+                        <NaviList />
                     </ul>
                 </div>
                 <div className="navbar-end">
