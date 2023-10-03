@@ -12,8 +12,16 @@ const Login = () => {
     const navigate = useNavigate();
 
     const login = async () => {
-        fetchCsrfToken();
-        auth.defaults.xsrfCookieName = 'csrftoken';
+        auth.defaults.headers['X-XSRF-TOKEN'] = await auth
+        .get('users/csrf/')
+        .then(res => {
+            console.log(res.data);
+            return res.data;
+        })
+        .catch(e =>{
+            console.error(e);
+        });
+        
         const response = await auth
         .post(baseURL + 'dj-rest-auth/login/',
             {
@@ -22,8 +30,8 @@ const Login = () => {
             },
         ).then(response => {
             console.log(response.data);
-            navigate('/');
             window.location.reload();
+            navigate('/');
         })
         .catch(error => {
             console.error('Login failed:', error);
@@ -34,7 +42,8 @@ const Login = () => {
     const fetchCsrfToken = async () => {
     const response = await auth.get('users/csrf/')
         .then(res => {
-            console.log(res);
+            console.log(res.data);
+            return res.data;
         })
         .catch(e =>{
             console.error(e);
