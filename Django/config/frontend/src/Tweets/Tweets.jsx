@@ -1,40 +1,29 @@
 import axios from "axios";
 import { useState,useEffect,useContext } from "react";
+import { Comment } from  'react-loader-spinner'
 import { UserContext } from "../context/userContext";
 import Tweet from "./Tweet";
 import CreateForm from "./CreateForm";
 
 const Tweets = () => {
     const [tweets,setTweets] = useState([]);
-    const { user} = useContext(UserContext);
+    const [isLoading,setLoading] = useState(true);
+    const {user} = useContext(UserContext);
 
     const baseURL = 'http://127.0.0.1:8000/api/';
-<<<<<<< HEAD
-    // axios.defaults.xsrfCookieName = 'csrftoken';
-    // axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
-=======
->>>>>>> bc07bfb8c55f2533d1cc2c78dc25cda1c52ec0a8
 
     const fetchTweets = async () => {
         await axios.get(baseURL + 'tweets/',
         {
             headers:{
             'Content-Type': 'application/json',
-<<<<<<< HEAD
-            // 'xsrfCookieName': 'XSRF-TOKEN',
-            // 'xsrfHeaderName': 'X-XSRF-TOKEN',
-=======
->>>>>>> bc07bfb8c55f2533d1cc2c78dc25cda1c52ec0a8
         },
         withCredentials: true,
         }
         )
         .then(response => {
-<<<<<<< HEAD
-            // fetchCsrfToken();
-=======
->>>>>>> bc07bfb8c55f2533d1cc2c78dc25cda1c52ec0a8
             setTweets(response.data);
+            setLoading(false);
             console.log(response);
         })
         .catch(error => {
@@ -60,20 +49,6 @@ const Tweets = () => {
         });
     };
 
-<<<<<<< HEAD
-    // const fetchCsrfToken = async () => {
-    //     const response = await axios.get(baseURL + 'api/csrf/',)
-    //         .then(res => {
-    //             console.log(res);
-    //             return res.json();
-    //         })
-    //         .catch(e =>{
-    //             console.error(e);
-    //         });
-    //     };
-
-=======
->>>>>>> bc07bfb8c55f2533d1cc2c78dc25cda1c52ec0a8
     // const onNewTweet = () => {
     //     newTweet();
     // }
@@ -86,14 +61,35 @@ const Tweets = () => {
 
     return (
         <>
-            <div className="pb-3 text-center text-xl bold font-bold">Home(仮)</div>
-            <CreateForm
-                // onNewTweet={onNewTweet}
-            />
-            {/* 投稿した直後にTweetが表示された方が気持ちいいよな。 */}
-            {tweets.map((tweet) => (
-                <Tweet key={tweet.id} tweet={tweet} />
-            ))}
+            { isLoading
+                ? (
+                    <div className="mt-10 mx-auto w-10">
+                        <Comment
+                            visible={true}
+                            height="50"
+                            width="50"
+                            ariaLabel="comment-loading"
+                            wrapperStyle={{}}
+                            wrapperClass="comment-wrapper"
+                            color="#fff"
+                            backgroundColor="#1D4ED8"
+                        />
+                    </div>
+                ) : (
+                    <>
+                        <div className="pb-3 text-center text-xl bold font-bold">Home(仮)</div>
+                        <CreateForm
+                            // onNewTweet={onNewTweet}
+                            />
+                        {tweets.map((tweet) => (
+                            <Tweet
+                            key={tweet.id}
+                            tweet={tweet}
+                            />
+                        ))}
+                    </>
+                )
+            }
         </>
     );
 };
