@@ -8,19 +8,6 @@ const Login = () => {
     const navigate = useNavigate();
 
     const login = async () => {
-<<<<<<< HEAD
-        auth.defaults.headers['X-XSRF-TOKEN'] = await auth
-        .get('users/csrf/')
-        .then(res => {
-            console.log(res.data);
-            return res.data;
-        })
-        .catch(e =>{
-            console.error(e);
-        });
-        
-=======
->>>>>>> bc07bfb8c55f2533d1cc2c78dc25cda1c52ec0a8
         const response = await auth
         .post('users/jwt/create/',
             {
@@ -30,12 +17,9 @@ const Login = () => {
         ).then(response => {
             const {refresh,access} = response.data;
             console.log(response.data);
-<<<<<<< HEAD
-=======
             localStorage.setItem('refreshtoken',refresh);
             localStorage.setItem('accesstoken',access);
             navigate('/');
->>>>>>> bc07bfb8c55f2533d1cc2c78dc25cda1c52ec0a8
             window.location.reload();
             navigate('/');
         })
@@ -45,20 +29,6 @@ const Login = () => {
         })
     };
 
-<<<<<<< HEAD
-    const fetchCsrfToken = async () => {
-    const response = await auth.get('users/csrf/')
-        .then(res => {
-            console.log(res.data);
-            return res.data;
-        })
-        .catch(e =>{
-            console.error(e);
-        });
-    };
-
-=======
->>>>>>> bc07bfb8c55f2533d1cc2c78dc25cda1c52ec0a8
     const handleSubmit = (e) => {
         e.preventDefault();
         login();

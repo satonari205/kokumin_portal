@@ -6,14 +6,12 @@ from datetime import timedelta
 DEFAULT_CHARSET = "utf-8"
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
 SECRET_KEY = 'django-insecure-%h*$^=l@%hm$d(m1u&1ruuzf3%3ysvc81%^&xr_lf@e!1m54j8'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -25,12 +23,12 @@ INSTALLED_APPS = [
     'accounts',
     'bbs',
     'django_vite',
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'djoser',
-    'corsheaders',
 ]
 
 SITE_ID = 1
@@ -67,7 +65,7 @@ MIDDLEWARE = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
+# CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
 
 CORS_ALLOW_HEADERS = [
     'content-type',
@@ -124,6 +122,9 @@ LANGUAGE_CODE = 'ja'
 TIME_ZONE = 'Asia/Tokyo'
 USE_I18N = True
 USE_TZ = True
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 STATIC_URL = 'static/'
 DJANGO_VITE_ASSETS_PATH = BASE_DIR / "frontend" / "dist"
