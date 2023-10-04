@@ -44,6 +44,8 @@ const ReplyForm = ({tweetId}) => {
             alert('投稿されました');
             setContent("");
             setImage(null);
+            // プレゼン終わったら外す
+            window.location.reload();
         }
     }
 

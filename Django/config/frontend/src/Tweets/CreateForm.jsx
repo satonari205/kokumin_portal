@@ -49,6 +49,8 @@ const CreateForm = () => {
             setContent("");
             setImage1(null);
             setImage2(null);
+            // プレゼン終わったら外す
+            window.location.reload();
         }
     }
 

@@ -30,7 +30,7 @@ const App = () => {
               </>
             )}
             <Route path="/notices" element={<Notices />} />
-            <Route path="/nomatch" element={<NoMatch />} />
+            <Route path="/*" element={<NoMatch />} />
           </Routes>
         </div>
       </Router>
