@@ -4,7 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import auth from "../api/auth";
 import Tweet from "../Tweets/Tweet";
-// import Magazines from "../Magazine/Magazines";
+import Magazines from "../Magazine/Magazines";
 
 const User = () => {
     const [user,setUser] = useState([]);
@@ -63,7 +63,7 @@ const User = () => {
                     ))}
                 </TabPanel>
                 <TabPanel>
-                    {/* <Magazines/> */}
+                    <Magazines/>
                 </TabPanel>
             </Tabs>
         </>

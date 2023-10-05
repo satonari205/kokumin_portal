@@ -4,20 +4,28 @@ import Magazine from "./Magazine";
 
 const Magazines = () => {
     const [isLoading,setLoading] = useState(true);
+    const loader = () => setLoading(false);
+
     return(
         <>
         { isLoading
             ? (
-                <div className="mx-auto mt-10 w-16 -translate-x-2">
-                    <Vortex
-                        visible={true}
-                        height="80"
-                        width="80"
-                        ariaLabel="vortex-loading"
-                        wrapperStyle={{}}
-                        wrapperClass="vortex-wrapper"
-                        colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']}
-                    />
+                <div className="mx-auto mt-10 w-20 -translate-x-2">
+                        <Vortex
+                            visible={true}
+                            height="80"
+                            width="80"
+                            ariaLabel="vortex-loading"
+                            wrapperStyle={{}}
+                            wrapperClass="vortex-wrapper"
+                            colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']}
+                        />
+                    <button
+                        onClick={loader}
+                        className="btn btn-warning mt-5"
+                    >
+                        Magazines
+                    </button>
                 </div>
             ) : (
                 <>
