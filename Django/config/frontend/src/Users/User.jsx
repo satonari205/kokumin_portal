@@ -54,8 +54,8 @@ const User = () => {
             </div>
             <Tabs className="font">
                 <TabList>
-                    <Tab>ひろば（仮）</Tab>
-                    <Tab>マガジン（仮）</Tab>
+                    <Tab>Home(仮)</Tab>
+                    <Tab>マガジン(仮)</Tab>
                 </TabList>
                 <TabPanel>
                     {tweets.map(tweet => (
