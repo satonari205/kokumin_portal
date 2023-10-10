@@ -1,0 +1,14 @@
+{
+  "main.css": {
+    "file": "main-2ab8b7a8.css",
+    "src": "main.css"
+  },
+  "main.jsx": {
+    "css": [
+      "main-2ab8b7a8.css"
+    ],
+    "file": "main-d90b60cc.js",
+    "isEntry": true,
+    "src": "main.jsx"
+  }
+}
