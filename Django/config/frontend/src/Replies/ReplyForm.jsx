@@ -42,10 +42,19 @@ const ReplyForm = ({tweetId}) => {
         else{
             CreateReply();
             alert('投稿されました');
-            setContent("");
+            setText("");
             setImage(null);
-            // プレゼン終わったら外す
-            window.location.reload();
+        }
+    }
+
+    const setText = (e) => {
+        const text = e.target.value;
+        if(!user){
+            alert('ログインが必要です。');
+            navigate('/login');
+        }
+        else{
+            setContent(text);
         }
     }
 
@@ -81,7 +90,7 @@ const ReplyForm = ({tweetId}) => {
                     className="textarea h-96 textarea-bordered"
                     placeholder="1万文字まで入力できます"
                     value={content}
-                    onChange={(e)=>{setContent(e.target.value)}}
+                    onChange={setText}
                 />
                 <div className="flex items-start justify-between px-1">
                     <input

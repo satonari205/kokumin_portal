@@ -31,23 +31,23 @@ const Tweets = () => {
         })
     }
 
-    const newTweet = async () => {
-        const res = await axios.get(baseURL + 'tweets/',{
-            params:{
-                user: user.id,
-                newtweet: true,
-            }
-        })
-        .then(res => {
-            const newTweetData = res.data;
-            console.log(newTweetData);
-            setTweets(prevTweets => [...prevTweets, newTweetData]);
-            console.log(tweets);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    };
+    // const newTweet = async () => {
+    //     const res = await axios.get(baseURL + 'tweets/',{
+    //         params:{
+    //             user: user.id,
+    //             newtweet: true,
+    //         }
+    //     })
+    //     .then(res => {
+    //         const newTweetData = res.data;
+    //         console.log(newTweetData);
+    //         setTweets(prevTweets => [...prevTweets, newTweetData]);
+    //         console.log(tweets);
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //     });
+    // };
 
     // const onNewTweet = () => {
     //     newTweet();
